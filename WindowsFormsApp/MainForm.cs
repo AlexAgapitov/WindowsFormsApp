@@ -38,7 +38,7 @@ namespace WindowsFormsApp
             dataGridView1.AllowUserToAddRows = false;
 
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            const string filterop = "Excel Files|*.xls";/*"CSV (*.csv)|*.csv" +*/
+            const string filterop = "CSV (*.csv)|*.csv" + "|Excel Files|*.xls";
             openFileDialog1.Filter = filterop;
             if (openFileDialog1.ShowDialog() == DialogResult.Cancel)
                 return;
@@ -53,8 +53,6 @@ namespace WindowsFormsApp
             GlobalExtension = extension;
             GlobalFilePath = filepath;
             GlobalFileName = filenameextension;
-
-            //MessageBox.Show(extension + filepath + filenameextension);
 
             if (extension == ".csv")
             {
@@ -193,7 +191,12 @@ namespace WindowsFormsApp
 
             }
         }
-            
+
+        /// <summary>
+        /// Функция, сохраняющая файл КАК XLS
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SaveAsXLSToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();

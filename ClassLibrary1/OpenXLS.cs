@@ -23,6 +23,10 @@ namespace ClassOpenAndSave
             ws = wb.Worksheets[1];  
         }
 
+        /// <summary>
+        /// Функция заполнения datatable значениями из excel
+        /// </summary>
+        /// <returns></returns>
         public DataTable MakeDataTable()
         {
             DataTable dataTable = new DataTable();

@@ -28,20 +28,15 @@ namespace ClassOpenAndSave
             ws = wb.Worksheets[1];
         }
 
+        /// <summary>
+        /// Фукнция сохранения файла xls
+        /// </summary>
         public void ExportToExcel()
         {
             for (int i = 0; i < dataTable.Columns.Count; i++)
             {
                 ws.Cells[1, 1 + i].Value = dataTable.Columns[i].ToString();
             }
-
-            /*foreach (DataRow row in dataTable.Rows)
-            {
-                foreach (DataColumn column in dataTable.Columns)
-                {
-                    ws.Cells[2 + dataTable.Rows.Count, 1 + dataTable.Columns.Count].Value = row[column].ToString();
-                }
-            }*/
 
             for (int i = 0; i < dataTable.Rows.Count; i++)
             {
@@ -52,7 +47,7 @@ namespace ClassOpenAndSave
                 }
             }
 
-            wb.SaveAs(filenamepath + filenamesave);
+            wb.SaveAs(filenamepath + filenamesave, Excel.XlFileFormat.xlAddIn8);
 
             wb.Close(false);
             excel.Quit();
