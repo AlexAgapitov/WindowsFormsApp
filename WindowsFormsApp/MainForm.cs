@@ -27,6 +27,7 @@ namespace WindowsFormsApp
         public string GlobalFilePath = string.Empty;
         public string GlobalFileName = string.Empty;
         public string GlobalSavePath = string.Empty;
+        public bool GlobalSaveAs = false;
 
         /// <summary>
         /// Функция, октрывающая главную форму и заполняющая datagrid данными
@@ -64,11 +65,14 @@ namespace WindowsFormsApp
             }
             else
             {
-                MessageBox.Show("Файл не соответсвует типу CSV или XLS");
+                MessageBox.Show("Файл не соответсвует типу CSV или XLS.");
             }
             ToolsStripMenuItem.Enabled = true;
         }
 
+        /// <summary>
+        /// Метод, обращающийся к классу OpenXLS
+        /// </summary>
         public void OpenFileXLS()
         {
             string file = GlobalFilePath + GlobalFileName;
@@ -83,20 +87,29 @@ namespace WindowsFormsApp
         /// <param name="e"></param>
         private void FileCSVToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-            const string filter = "CSV (*.csv)|*.csv";
-            saveFileDialog1.Filter = filter;
+            try
+            {
+                SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+                const string filter = "CSV (*.csv)|*.csv";
+                saveFileDialog1.Filter = filter;
 
-            if (saveFileDialog1.ShowDialog() == DialogResult.Cancel)
-                return;
-            string filepathsave = System.IO.Path.GetDirectoryName(saveFileDialog1.FileName);
-            string filenamesave = System.IO.Path.GetFileName(saveFileDialog1.FileName);
+                if (saveFileDialog1.ShowDialog() == DialogResult.Cancel)
+                    return;
+                string filepathsave = System.IO.Path.GetDirectoryName(saveFileDialog1.FileName);
+                string filenamesave = System.IO.Path.GetFileName(saveFileDialog1.FileName);
 
-            table = (DataTable)dataGridView1.DataSource;
+                table = (DataTable)dataGridView1.DataSource;
 
-            string resultForSave = ClassOpenAndSave.SaveCSV.MakeOneCSV(table);
+                string resultForSave = ClassOpenAndSave.SaveCSV.MakeOneCSV(table);
 
-            File.WriteAllText(filepathsave + "\\" + filenamesave, resultForSave);
+                File.WriteAllText(filepathsave + "\\" + filenamesave, resultForSave);
+
+                MessageBox.Show("Файл успешно сохранен.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         /// <summary>
@@ -177,18 +190,28 @@ namespace WindowsFormsApp
         /// <param name="e"></param>
         private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string extension = GlobalExtension;
-            if (extension == ".csv")
+            try
             {
-                table = (DataTable)dataGridView1.DataSource;
+                string extension = GlobalExtension;
+                if (extension == ".csv")
+                {
+                    table = (DataTable)dataGridView1.DataSource;
 
-                string resultForSave = ClassOpenAndSave.SaveCSV.MakeOneCSV(table);
+                    string resultForSave = ClassOpenAndSave.SaveCSV.MakeOneCSV(table);
 
-                File.WriteAllText(GlobalFilePath + "\\" + GlobalFileName, resultForSave);
+                    File.WriteAllText(GlobalFilePath + "\\" + GlobalFileName, resultForSave);
+                }
+                else
+                {
+                    GlobalSaveAs = false;
+                    SaveFileXLS(GlobalSaveAs);
+                }
+
+                MessageBox.Show("Файл успешно сохранен.");
             }
-            else
+            catch (Exception ex)
             {
-
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -199,24 +222,39 @@ namespace WindowsFormsApp
         /// <param name="e"></param>
         private void SaveAsXLSToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-            const string filter = "Excel Files|*.xls";
-            saveFileDialog1.Filter = filter;
+            try
+            {
+                SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+                const string filter = "Excel Files|*.xls";
+                saveFileDialog1.Filter = filter;
 
-            if (saveFileDialog1.ShowDialog() == DialogResult.Cancel)
-                return;
-            string filepathsave = System.IO.Path.GetDirectoryName(saveFileDialog1.FileName);
-            string filenamesave = System.IO.Path.GetFileName(saveFileDialog1.FileName);
+                if (saveFileDialog1.ShowDialog() == DialogResult.Cancel)
+                    return;
+                string filepathsave = System.IO.Path.GetDirectoryName(saveFileDialog1.FileName);
+                string filenamesave = System.IO.Path.GetFileName(saveFileDialog1.FileName);
 
-            GlobalSavePath = filepathsave + "\\";
-            GlobalFileName = filenamesave;
-            SaveFileXLS();
+                GlobalSaveAs = true;
+                GlobalSavePath = filepathsave + "\\";
+                GlobalFileName = filenamesave;
+                SaveFileXLS(GlobalSaveAs);
+                MessageBox.Show("Файл успешно сохранен.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
-        public void SaveFileXLS()
+        /// <summary>
+        /// Метод, обращающийся к классу SaveXLS
+        /// </summary>
+        /// <param name="saveAs">Булевая переменная, сохранить в этот файл или новый</param>
+        public void SaveFileXLS(bool saveAs)
         {
             table = (DataTable)dataGridView1.DataSource;
-            ClassOpenAndSave.SaveXLS excel = new ClassOpenAndSave.SaveXLS(GlobalSavePath, GlobalFileName, table);
+            if (saveAs != true)
+                GlobalSavePath = GlobalFilePath; 
+            ClassOpenAndSave.SaveXLS excel = new ClassOpenAndSave.SaveXLS(GlobalSavePath, GlobalFileName, table, saveAs);
             excel.ExportToExcel();
         }
 

@@ -17,15 +17,23 @@ namespace ClassOpenAndSave
         Excel.Workbook wb;
         Excel.Worksheet ws;
 
-        public SaveXLS(string filenamepath, string filenamesave, DataTable dataTable)
+        public SaveXLS(string filenamepath, string filenamesave, DataTable dataTable, bool saveAs)
         {
             this.filenamesave = filenamesave;
             this.filenamepath = filenamepath;
             this.dataTable = dataTable;
             excel = new Excel.Application();
-            excel.SheetsInNewWorkbook = 3;
-            wb = excel.Workbooks.Add(1);
-            ws = wb.Worksheets[1];
+            if (saveAs == true)
+            {
+                excel.SheetsInNewWorkbook = 3;
+                wb = excel.Workbooks.Add(1);
+                ws = wb.Worksheets[1];
+            }
+            else
+            {
+                wb = excel.Workbooks.Open(filenamepath + filenamesave);
+                ws = wb.Worksheets[1];
+            }
         }
 
         /// <summary>

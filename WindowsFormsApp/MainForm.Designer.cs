@@ -55,7 +55,7 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(0, 27);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(800, 424);
+            this.dataGridView1.Size = new System.Drawing.Size(784, 385);
             this.dataGridView1.TabIndex = 0;
             // 
             // contextMenuStrip1
@@ -70,7 +70,7 @@
             this.ToolsStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(784, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -129,34 +129,34 @@
             this.DeleteLineToolStripMenuItem,
             this.DeleteColumnToolStripMenuItem});
             this.ToolsStripMenuItem.Name = "ToolsStripMenuItem";
-            this.ToolsStripMenuItem.Size = new System.Drawing.Size(71, 20);
-            this.ToolsStripMenuItem.Text = "Добавить";
+            this.ToolsStripMenuItem.Size = new System.Drawing.Size(69, 20);
+            this.ToolsStripMenuItem.Text = "Редактор";
             // 
             // AddLineToolStripMenuItem
             // 
             this.AddLineToolStripMenuItem.Name = "AddLineToolStripMenuItem";
-            this.AddLineToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.AddLineToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.AddLineToolStripMenuItem.Text = "Добавить строку";
             this.AddLineToolStripMenuItem.Click += new System.EventHandler(this.AddLineToolStripMenuItem_Click);
             // 
             // AddColumnsToolStripMenuItem
             // 
             this.AddColumnsToolStripMenuItem.Name = "AddColumnsToolStripMenuItem";
-            this.AddColumnsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.AddColumnsToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.AddColumnsToolStripMenuItem.Text = "Добавить столбец";
             this.AddColumnsToolStripMenuItem.Click += new System.EventHandler(this.AddColumnToolStripMenuItem_Click);
             // 
             // DeleteLineToolStripMenuItem
             // 
             this.DeleteLineToolStripMenuItem.Name = "DeleteLineToolStripMenuItem";
-            this.DeleteLineToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.DeleteLineToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.DeleteLineToolStripMenuItem.Text = "Удалить строку";
             this.DeleteLineToolStripMenuItem.Click += new System.EventHandler(this.DeleteLineToolStripMenuItem_Click);
             // 
             // DeleteColumnToolStripMenuItem
             // 
             this.DeleteColumnToolStripMenuItem.Name = "DeleteColumnToolStripMenuItem";
-            this.DeleteColumnToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.DeleteColumnToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.DeleteColumnToolStripMenuItem.Text = "Удалить стоблец";
             this.DeleteColumnToolStripMenuItem.Click += new System.EventHandler(this.DeleteColumnToolStripMenuItem_Click);
             // 
@@ -168,12 +168,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(784, 411);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.dataGridView1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
-            this.Text = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.menuStrip1.ResumeLayout(false);

@@ -81,6 +81,7 @@
             this.Controls.Add(this.Cancel);
             this.Controls.Add(this.AddNewColumnBtn);
             this.Name = "MakeNewColumns";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Создание нового столбца";
             this.ResumeLayout(false);
             this.PerformLayout();
