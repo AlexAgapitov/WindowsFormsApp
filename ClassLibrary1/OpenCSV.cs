@@ -10,15 +10,17 @@ namespace ClassOpenAndSave
 {
     public class OpenCSV
     {
+        public static char GlobalChar;
+
         /// <summary>
         /// Фукнция создания листа с названиями столбцов
         /// </summary>
         /// <param name="_firstLine">Первая строка CSV файла (название столбцов)</param>
-        /// <returns></returns>
+        /// <returns>Список с названием колонок</returns>
         public static List<string> MakeNameColumns(string _firstLine)
         {
             List<string> _listNameColomns = new List<string>();
-            _listNameColomns = _firstLine.Split(',').ToList();
+            _listNameColomns = _firstLine.Split(GlobalChar).ToList();
 
             return _listNameColomns;
         }
@@ -27,29 +29,62 @@ namespace ClassOpenAndSave
         /// Функция создания листа с значениями ячеек
         /// </summary>
         /// <param name="_lines">Лист со строками</param>
-        /// <returns></returns>
+        /// <returns>Список с значениями ячеек</returns>
         public static List<List<string>> MakeCells(List<string> _lines)
         {
             List<List<string>> _cellsValue = new List<List<string>>();
             for (int i = 1; i < _lines.Count; i++)
             {
-                _cellsValue.Add(_lines[i].Split(',').ToList());
+                _cellsValue.Add(_lines[i].Split(GlobalChar).ToList());
             }
 
             return _cellsValue;
         }
 
         /// <summary>
-        /// Функция таблицы данных
+        /// Функция, создающая список строк
         /// </summary>
-        /// <param name="table"></param>
-        /// <param name="_colums">Лист с названием колонок</param>
-        /// <param name="_cells">Лист с значениями ячеек</param>
-        /// <returns></returns>
-        public static DataTable MakeDataTable(string filenameopen)
+        /// <param name="filenameopen">Путь к файлу</param>
+        /// <returns>Список со строками</returns>
+        public static List<string> MakeList(string filenameopen)
         {
+            List<string> _allDB = new List<string>();
+
+            using (StreamReader sr = new StreamReader(filenameopen))
+            {
+                int i = 0;
+                string line;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    if (line[line.Length - 1] != GlobalChar)
+                    {
+                        return null;
+                    }
+                    line = line.Remove(line.Length - 1);
+                    _allDB.Add(line);
+                    i++;
+                }
+            }
+            return _allDB;
+        }
+
+        /// <summary>
+        /// Функция, создания datatable для вывода 
+        /// </summary>
+        /// <param name="filenameopen">Путь к файлу</param>
+        /// <param name="separator">Символ разделителя</param>
+        /// <returns>datatable с значениями из БД</returns>
+        public static DataTable MakeDataTable(string filenameopen, char separator)
+        {
+            GlobalChar = separator;
             List<string> ListCsv = MakeList(filenameopen);
             DataTable SaveTable = new DataTable();
+
+            if (ListCsv == null)
+            {
+                return null;
+            }
+
             List<string> Colums = MakeNameColumns(ListCsv[0]);
             List<List<string>> Cells = MakeCells(ListCsv);
 
@@ -67,29 +102,6 @@ namespace ClassOpenAndSave
             }
 
             return SaveTable;
-        }
-
-        /// <summary>
-        /// Фукнция записывающая данные в лист
-        /// </summary>
-        /// <param name="filenameopen">путь к файлу</param>
-        /// <returns></returns>
-        public static List<string> MakeList(string filenameopen)
-        {
-            List<string> _allDB = new List<string>();
-
-            using (StreamReader sr = new StreamReader(filenameopen))
-            {
-                int i = 0;
-                string line;
-                while ((line = sr.ReadLine()) != null)
-                {
-                    line = line.Remove(line.Length - 1);
-                    _allDB.Add(line);
-                    i++;
-                }
-            }
-            return _allDB;
         }
     }
 }

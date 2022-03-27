@@ -17,14 +17,18 @@ namespace WindowsFormsApp
             InitializeComponent();
         }
 
+        public string columnsName = string.Empty;
+
         private void Cancel_Click(object sender, EventArgs e)
         {
-
+            columnsName = string.Empty;
+            MainForm mainForm = new MainForm();
+            Close();
         }
 
         private void AddNewColumnBtn_Click(object sender, EventArgs e)
         {
-            string NameColumn = textBoxNameColumns.Text;
+            columnsName = textBoxNameColumns.Text;
             MainForm mainForm = new MainForm();
             Close();
         }

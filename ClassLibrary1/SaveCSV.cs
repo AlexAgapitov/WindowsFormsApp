@@ -10,17 +10,18 @@ namespace ClassOpenAndSave
     public class SaveCSV
     {
         /// <summary>
-        /// Создание строки
+        /// Фукнция, которая создает строку для CSV
         /// </summary>
-        /// <param name="table">таблица</param>
-        /// <returns></returns>
-        public static string MakeOneCSV(DataTable table)
+        /// <param name="table">Таблица с данными, которые нужно сохранить</param>
+        /// <param name="separator">Символ разделителя</param>
+        /// <returns>Строка с данными в формате csv</returns>
+        public static string MakeOneCSV(DataTable table, char separator)
         {
             string csv = string.Empty;
 
             for(int i = 0; i < table.Columns.Count; i++)
             { 
-                csv += table.Columns[i].ToString() + ',';
+                csv += table.Columns[i].ToString() + separator;
             }
 
             csv += "\r\n";
@@ -29,7 +30,7 @@ namespace ClassOpenAndSave
             {
                 foreach (DataColumn column in table.Columns)
                 {
-                    csv += row[column].ToString() + ','; 
+                    csv += row[column].ToString() + separator; 
                 }
                 csv += "\r\n";
             }

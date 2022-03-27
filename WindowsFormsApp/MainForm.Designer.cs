@@ -45,6 +45,14 @@
             this.DeleteColumnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.label1 = new System.Windows.Forms.Label();
+            this.checkBoxSeparator = new System.Windows.Forms.CheckBox();
+            this.radioButtonComma = new System.Windows.Forms.RadioButton();
+            this.radioButtonCemicolon = new System.Windows.Forms.RadioButton();
+            this.radioButtonOther = new System.Windows.Forms.RadioButton();
+            this.radioButtonSpace = new System.Windows.Forms.RadioButton();
+            this.radioButtonTabuletion = new System.Windows.Forms.RadioButton();
+            this.textBoxOtherSeparator = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -53,9 +61,9 @@
             // 
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 27);
+            this.dataGridView1.Location = new System.Drawing.Point(0, 121);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(784, 385);
+            this.dataGridView1.Size = new System.Drawing.Size(784, 291);
             this.dataGridView1.TabIndex = 0;
             // 
             // contextMenuStrip1
@@ -164,11 +172,102 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 24);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(134, 13);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Параметры разделителя";
+            // 
+            // checkBoxSeparator
+            // 
+            this.checkBoxSeparator.AutoSize = true;
+            this.checkBoxSeparator.Location = new System.Drawing.Point(15, 49);
+            this.checkBoxSeparator.Name = "checkBoxSeparator";
+            this.checkBoxSeparator.Size = new System.Drawing.Size(92, 17);
+            this.checkBoxSeparator.TabIndex = 4;
+            this.checkBoxSeparator.Text = "Разделитель";
+            this.checkBoxSeparator.UseVisualStyleBackColor = true;
+            this.checkBoxSeparator.CheckedChanged += new System.EventHandler(this.checkBoxSeparator_CheckedChanged);
+            // 
+            // radioButtonComma
+            // 
+            this.radioButtonComma.AutoSize = true;
+            this.radioButtonComma.Location = new System.Drawing.Point(15, 72);
+            this.radioButtonComma.Name = "radioButtonComma";
+            this.radioButtonComma.Size = new System.Drawing.Size(67, 17);
+            this.radioButtonComma.TabIndex = 5;
+            this.radioButtonComma.TabStop = true;
+            this.radioButtonComma.Text = "Запятая";
+            this.radioButtonComma.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonCemicolon
+            // 
+            this.radioButtonCemicolon.AutoSize = true;
+            this.radioButtonCemicolon.Location = new System.Drawing.Point(106, 72);
+            this.radioButtonCemicolon.Name = "radioButtonCemicolon";
+            this.radioButtonCemicolon.Size = new System.Drawing.Size(108, 17);
+            this.radioButtonCemicolon.TabIndex = 6;
+            this.radioButtonCemicolon.TabStop = true;
+            this.radioButtonCemicolon.Text = "Точка с запятой";
+            this.radioButtonCemicolon.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonOther
+            // 
+            this.radioButtonOther.AutoSize = true;
+            this.radioButtonOther.Location = new System.Drawing.Point(220, 72);
+            this.radioButtonOther.Name = "radioButtonOther";
+            this.radioButtonOther.Size = new System.Drawing.Size(62, 17);
+            this.radioButtonOther.TabIndex = 7;
+            this.radioButtonOther.TabStop = true;
+            this.radioButtonOther.Text = "Другое";
+            this.radioButtonOther.UseVisualStyleBackColor = true;
+            this.radioButtonOther.CheckedChanged += new System.EventHandler(this.radioButtonOther_CheckedChanged);
+            // 
+            // radioButtonSpace
+            // 
+            this.radioButtonSpace.AutoSize = true;
+            this.radioButtonSpace.Location = new System.Drawing.Point(15, 95);
+            this.radioButtonSpace.Name = "radioButtonSpace";
+            this.radioButtonSpace.Size = new System.Drawing.Size(63, 17);
+            this.radioButtonSpace.TabIndex = 8;
+            this.radioButtonSpace.TabStop = true;
+            this.radioButtonSpace.Text = "Пробел";
+            this.radioButtonSpace.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonTabuletion
+            // 
+            this.radioButtonTabuletion.AutoSize = true;
+            this.radioButtonTabuletion.Location = new System.Drawing.Point(106, 95);
+            this.radioButtonTabuletion.Name = "radioButtonTabuletion";
+            this.radioButtonTabuletion.Size = new System.Drawing.Size(79, 17);
+            this.radioButtonTabuletion.TabIndex = 9;
+            this.radioButtonTabuletion.TabStop = true;
+            this.radioButtonTabuletion.Text = "Табуляция";
+            this.radioButtonTabuletion.UseVisualStyleBackColor = true;
+            // 
+            // textBoxOtherSeparator
+            // 
+            this.textBoxOtherSeparator.Location = new System.Drawing.Point(288, 72);
+            this.textBoxOtherSeparator.Name = "textBoxOtherSeparator";
+            this.textBoxOtherSeparator.Size = new System.Drawing.Size(85, 20);
+            this.textBoxOtherSeparator.TabIndex = 10;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 411);
+            this.Controls.Add(this.textBoxOtherSeparator);
+            this.Controls.Add(this.radioButtonTabuletion);
+            this.Controls.Add(this.radioButtonSpace);
+            this.Controls.Add(this.radioButtonOther);
+            this.Controls.Add(this.radioButtonCemicolon);
+            this.Controls.Add(this.radioButtonComma);
+            this.Controls.Add(this.checkBoxSeparator);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.dataGridView1);
             this.MainMenuStrip = this.menuStrip1;
@@ -201,6 +300,14 @@
         private System.Windows.Forms.ToolStripMenuItem DeleteLineToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem DeleteColumnToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem SaveAsXLSToolStripMenuItem;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox checkBoxSeparator;
+        private System.Windows.Forms.RadioButton radioButtonComma;
+        private System.Windows.Forms.RadioButton radioButtonCemicolon;
+        private System.Windows.Forms.RadioButton radioButtonOther;
+        private System.Windows.Forms.RadioButton radioButtonSpace;
+        private System.Windows.Forms.RadioButton radioButtonTabuletion;
+        private System.Windows.Forms.TextBox textBoxOtherSeparator;
     }
 }
 

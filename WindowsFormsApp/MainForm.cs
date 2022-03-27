@@ -39,7 +39,7 @@ namespace WindowsFormsApp
             dataGridView1.AllowUserToAddRows = false;
 
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            const string filterop = "CSV (*.csv)|*.csv" + "|Excel Files|*.xls";
+            const string filterop = "txt files (*.txt)|*.txt" + "|Excel Files|*.xls"; //CSV (*.csv)|*.csv" 
             openFileDialog1.Filter = filterop;
             if (openFileDialog1.ShowDialog() == DialogResult.Cancel)
                 return;
@@ -55,9 +55,19 @@ namespace WindowsFormsApp
             GlobalFilePath = filepath;
             GlobalFileName = filenameextension;
 
-            if (extension == ".csv")
+            if (extension == ".txt")
             {
-                dataGridView1.DataSource = ClassOpenAndSave.OpenCSV.MakeDataTable(filenameopen);
+                char separator = ReturnChar();
+                DataTable dt = new DataTable();
+                dt = ClassOpenAndSave.OpenCSV.MakeDataTable(filenameopen, separator);
+                if (dt == null)
+                {
+                    MessageBox.Show("Символ " + separator + " не является разделителем в данном файле.");
+                }
+                else
+                {
+                    dataGridView1.DataSource = dt;
+                }
             }
             else if (extension == ".xls")
             {
@@ -67,6 +77,7 @@ namespace WindowsFormsApp
             {
                 MessageBox.Show("Файл не соответсвует типу CSV или XLS.");
             }
+            RadioBtnEnabled();
             ToolsStripMenuItem.Enabled = true;
         }
 
@@ -90,7 +101,7 @@ namespace WindowsFormsApp
             try
             {
                 SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-                const string filter = "CSV (*.csv)|*.csv";
+                const string filter = "txt files (*.txt)|*.txt";
                 saveFileDialog1.Filter = filter;
 
                 if (saveFileDialog1.ShowDialog() == DialogResult.Cancel)
@@ -98,9 +109,10 @@ namespace WindowsFormsApp
                 string filepathsave = System.IO.Path.GetDirectoryName(saveFileDialog1.FileName);
                 string filenamesave = System.IO.Path.GetFileName(saveFileDialog1.FileName);
 
+                char separator = ReturnChar();
                 table = (DataTable)dataGridView1.DataSource;
 
-                string resultForSave = ClassOpenAndSave.SaveCSV.MakeOneCSV(table);
+                string resultForSave = ClassOpenAndSave.SaveCSV.MakeOneCSV(table, separator);
 
                 File.WriteAllText(filepathsave + "\\" + filenamesave, resultForSave);
 
@@ -119,8 +131,15 @@ namespace WindowsFormsApp
         /// <param name="e"></param>
         private void AddLineToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            table = (DataTable)dataGridView1.DataSource;
-            table.Rows.Add();
+            if (dataGridView1.ColumnCount == 0)
+            {
+                MessageBox.Show("Создайте колонку, чтобы добавить строку.");
+            }
+            else
+            {
+                table = (DataTable)dataGridView1.DataSource;
+                table.Rows.Add();
+            }
         }
 
         /// <summary>
@@ -135,11 +154,22 @@ namespace WindowsFormsApp
             makeNewColumns.Text = "Создание нового столбца";
             makeNewColumns.ShowDialog();
 
-            string str = makeNewColumns.textBoxNameColumns.Text;
+            string str = makeNewColumns.columnsName;
 
-            table = (DataTable)dataGridView1.DataSource;
-
-            table.Columns.Add(str.ToString(), typeof(string));
+            if (str != string.Empty)
+            {
+                if (dataGridView1.ColumnCount == 0)
+                {
+                    DataTable dt = new DataTable();
+                    dt.Columns.Add(str.ToString(), typeof(string));
+                    dataGridView1.DataSource = dt;
+                }
+                else
+                {
+                    table = (DataTable)dataGridView1.DataSource;
+                    table.Columns.Add(str.ToString(), typeof(string));
+                }
+            }
         }
 
         /// <summary>
@@ -191,13 +221,14 @@ namespace WindowsFormsApp
         private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
-            {
+            { 
                 string extension = GlobalExtension;
-                if (extension == ".csv")
+                char separator = ReturnChar();
+                if (extension == ".txt")
                 {
                     table = (DataTable)dataGridView1.DataSource;
 
-                    string resultForSave = ClassOpenAndSave.SaveCSV.MakeOneCSV(table);
+                    string resultForSave = ClassOpenAndSave.SaveCSV.MakeOneCSV(table, separator);
 
                     File.WriteAllText(GlobalFilePath + "\\" + GlobalFileName, resultForSave);
                 }
@@ -265,7 +296,78 @@ namespace WindowsFormsApp
         /// <param name="e"></param>
         private void MainForm_Load(object sender, EventArgs e)
         {
-            ToolsStripMenuItem.Enabled = false;
+            checkBoxSeparator.Checked = false;
+            radioButtonComma.Checked = true;
+            textBoxOtherSeparator.Enabled = false;
+            RadioBtnEnabled();
+        }
+
+        /// <summary>
+        /// Метод, radioButton не активны
+        /// </summary>
+        public void RadioBtnEnabled()
+        {
+            checkBoxSeparator.Checked = false;
+            radioButtonComma.Checked = true;
+            radioButtonSpace.Enabled = false;
+            radioButtonOther.Enabled = false;
+            radioButtonComma.Enabled = false;
+            radioButtonCemicolon.Enabled = false;
+            radioButtonTabuletion.Enabled = false;
+        }
+
+        /// <summary>
+        /// Метод, определяющий символ разделителя
+        /// </summary>
+        /// <returns>Символ разделителя</returns>
+        public char ReturnChar()
+        {
+            char SeparatorChar = ',';
+
+            if (checkBoxSeparator.Checked == true)
+            {
+                if (radioButtonComma.Checked == true)
+                    SeparatorChar = ',';
+                if (radioButtonCemicolon.Checked == true)
+                    SeparatorChar = ';';
+                if (radioButtonSpace.Checked == true)
+                    SeparatorChar = ' ';
+                if (radioButtonTabuletion.Checked == true)
+                    SeparatorChar = '\t';
+                if (radioButtonOther.Checked == true)
+                    SeparatorChar = textBoxOtherSeparator.Text[0];
+            }
+            return SeparatorChar;
+        }
+
+        /// <summary>
+        /// Пока checkBox не помечен, radioButton не активны
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void checkBoxSeparator_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxSeparator.Checked == true)
+            {
+                radioButtonTabuletion.Enabled = true;
+                radioButtonSpace.Enabled = true;
+                radioButtonOther.Enabled = true;
+                radioButtonComma.Enabled = true;
+                radioButtonCemicolon.Enabled = true;
+            }
+        }
+
+        /// <summary>
+        /// При нажатии Другое textbox становится доступным
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void radioButtonOther_CheckedChanged(object sender, EventArgs e)
+        {
+            if(radioButtonOther.Checked)
+                textBoxOtherSeparator.Enabled = true;
+            else
+                textBoxOtherSeparator.Enabled = false;
         }
     }
 }
