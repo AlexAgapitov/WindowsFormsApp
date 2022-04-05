@@ -55,6 +55,8 @@ namespace WindowsFormsApp
             GlobalFilePath = filepath;
             GlobalFileName = filenameextension;
 
+            this.Text += "[" + GlobalFileName + "]";
+
             if (extension == ".txt")
             {
                 char separator = ReturnChar();
@@ -314,6 +316,7 @@ namespace WindowsFormsApp
             radioButtonComma.Enabled = false;
             radioButtonCemicolon.Enabled = false;
             radioButtonTabuletion.Enabled = false;
+            textBoxOtherSeparator.Text = string.Empty;
         }
 
         /// <summary>

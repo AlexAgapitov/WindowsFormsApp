@@ -47,7 +47,6 @@
   <ItemGroup>
     <Compile Include="OpenCSV.cs" />
     <Compile Include="OpenXLS.cs" />
-    <Compile Include="QueueClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SaveCSV.cs" />
     <Compile Include="SaveXLS.cs" />
