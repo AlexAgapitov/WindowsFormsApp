@@ -28,6 +28,7 @@ namespace WindowsFormsApp
         public string GlobalFileName = string.Empty;
         public string GlobalSavePath = string.Empty;
         public bool GlobalSaveAs = false;
+        public bool GlobalMaxCountLine = false;
 
         /// <summary>
         /// Функция, октрывающая главную форму и заполняющая datagrid данными
@@ -55,13 +56,14 @@ namespace WindowsFormsApp
             GlobalFilePath = filepath;
             GlobalFileName = filenameextension;
 
-            this.Text += "[" + GlobalFileName + "]";
+            this.Text = "Репозитой БД [" + GlobalFileName + "]";
+            CheckLineCount();
 
             if (extension == ".txt")
             {
                 char separator = ReturnChar();
                 DataTable dt = new DataTable();
-                dt = ClassOpenAndSave.OpenCSV.MakeDataTable(filenameopen, separator);
+                dt = ClassOpenAndSave.OpenCSV.MakeDataTable(filenameopen, separator, GlobalMaxCountLine);
                 if (dt == null)
                 {
                     MessageBox.Show("Символ " + separator + " не является разделителем в данном файле.");
@@ -79,6 +81,13 @@ namespace WindowsFormsApp
             {
                 MessageBox.Show("Файл не соответсвует типу CSV или XLS.");
             }
+            //нумерация строк
+            int rows = dataGridView1.RowCount;
+            for (int i = 0; i < rows; i++)
+            {
+                dataGridView1.Rows[i].HeaderCell.Value = (dataGridView1.Rows[i].Index + 1).ToString();// i+1 потому, что нумерация нужна 
+            }
+
             RadioBtnEnabled();
             ToolsStripMenuItem.Enabled = true;
         }
@@ -89,7 +98,7 @@ namespace WindowsFormsApp
         public void OpenFileXLS()
         {
             string file = GlobalFilePath + GlobalFileName;
-            ClassOpenAndSave.OpenXLS excel = new ClassOpenAndSave.OpenXLS(@file);
+            ClassOpenAndSave.OpenXLS excel = new ClassOpenAndSave.OpenXLS(@file, GlobalMaxCountLine) ;
             dataGridView1.DataSource = excel.MakeDataTable();
         }
 
@@ -301,13 +310,14 @@ namespace WindowsFormsApp
             checkBoxSeparator.Checked = false;
             radioButtonComma.Checked = true;
             textBoxOtherSeparator.Enabled = false;
+            radioButton100Line.Checked = false;
             RadioBtnEnabled();
         }
 
         /// <summary>
         /// Метод, radioButton не активны
         /// </summary>
-        public void RadioBtnEnabled()
+        private void RadioBtnEnabled()
         {
             checkBoxSeparator.Checked = false;
             radioButtonComma.Checked = true;
@@ -323,7 +333,7 @@ namespace WindowsFormsApp
         /// Метод, определяющий символ разделителя
         /// </summary>
         /// <returns>Символ разделителя</returns>
-        public char ReturnChar()
+        private char ReturnChar()
         {
             char SeparatorChar = ',';
 
@@ -371,6 +381,14 @@ namespace WindowsFormsApp
                 textBoxOtherSeparator.Enabled = true;
             else
                 textBoxOtherSeparator.Enabled = false;
+        }
+
+        private void CheckLineCount()
+        {
+            if (radioButton100Line.Checked == true)
+            {
+                GlobalMaxCountLine = true;
+            }
         }
     }
 }

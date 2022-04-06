@@ -12,13 +12,15 @@ namespace ClassOpenAndSave
     public class OpenXLS
     {
         string filenameopen = string.Empty;
+        bool maxcountline = false;
         Excel.Application excel = new Excel.Application();
         Excel.Workbook wb;
         Excel.Worksheet ws;
 
-        public OpenXLS(string filenameopen)
+        public OpenXLS(string filenameopen, bool maxcountline)
         {
             this.filenameopen = filenameopen;
+            this.maxcountline = maxcountline;
             wb = excel.Workbooks.Open(filenameopen);
             ws = wb.Worksheets[1];  
         }
@@ -42,6 +44,9 @@ namespace ClassOpenAndSave
             int countlines = 2;
             while (ws.Cells[countlines, 1].Value != null)
                 countlines++;
+
+            if (maxcountline == true && countlines > 100)
+                countlines = 102;
 
             for (int i = 0; i < countlines-2; i++)
             {

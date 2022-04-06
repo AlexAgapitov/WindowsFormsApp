@@ -46,7 +46,7 @@ namespace ClassOpenAndSave
         /// </summary>
         /// <param name="filenameopen">Путь к файлу</param>
         /// <returns>Список со строками</returns>
-        public static List<string> MakeList(string filenameopen)
+        public static List<string> MakeList(string filenameopen, bool maxcountline)
         {
             List<string> _allDB = new List<string>();
 
@@ -59,6 +59,10 @@ namespace ClassOpenAndSave
                     if (line[line.Length - 1] != GlobalChar)
                     {
                         return null;
+                    }
+                    if (maxcountline == true && i > 100)
+                    {
+                        break;
                     }
                     line = line.Remove(line.Length - 1);
                     _allDB.Add(line);
@@ -74,10 +78,10 @@ namespace ClassOpenAndSave
         /// <param name="filenameopen">Путь к файлу</param>
         /// <param name="separator">Символ разделителя</param>
         /// <returns>datatable с значениями из БД</returns>
-        public static DataTable MakeDataTable(string filenameopen, char separator)
+        public static DataTable MakeDataTable(string filenameopen, char separator, bool maxcountline)
         {
             GlobalChar = separator;
-            List<string> ListCsv = MakeList(filenameopen);
+            List<string> ListCsv = MakeList(filenameopen, maxcountline);
             DataTable SaveTable = new DataTable();
 
             if (ListCsv == null)
