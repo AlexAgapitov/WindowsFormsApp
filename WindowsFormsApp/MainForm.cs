@@ -368,6 +368,14 @@ namespace WindowsFormsApp
                 radioButtonComma.Enabled = true;
                 radioButtonCemicolon.Enabled = true;
             }
+            else
+            {
+                radioButtonTabuletion.Enabled = false;
+                radioButtonSpace.Enabled = false;
+                radioButtonOther.Enabled = false;
+                radioButtonComma.Enabled = false;
+                radioButtonCemicolon.Enabled = false;
+            }
         }
 
         /// <summary>

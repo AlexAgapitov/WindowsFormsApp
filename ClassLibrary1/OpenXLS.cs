@@ -13,45 +13,46 @@ namespace ClassOpenAndSave
     {
         string filenameopen = string.Empty;
         bool maxcountline = false;
+        int iLastRow, iLastCol;
         Excel.Application excel = new Excel.Application();
         Excel.Workbook wb;
         Excel.Worksheet ws;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="filenameopen">путь к файлу</param>
+        /// <param name="maxcountline">булевая перменная, все строки или 100</param>
         public OpenXLS(string filenameopen, bool maxcountline)
         {
             this.filenameopen = filenameopen;
             this.maxcountline = maxcountline;
             wb = excel.Workbooks.Open(filenameopen);
-            ws = wb.Worksheets[1];  
+            ws = wb.Worksheets[1];
+            iLastRow = ws.Cells[ws.Rows.Count, "A"].End[Excel.XlDirection.xlUp].Row;
+            iLastCol = ws.Cells[1, ws.Columns.Count].End[Excel.XlDirection.xlToLeft].Column;
         }
 
         /// <summary>
         /// Функция заполнения datatable значениями из excel
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Заполненая datatable</returns>
         public DataTable MakeDataTable()
         {
             DataTable dataTable = new DataTable();
 
-            string res = string.Empty;
-            int countrows = 0;
-            while (ws.Cells[1, countrows + 1].Value != null)
+            for (int i = 0; i < iLastCol; i++)
             {
-                dataTable.Columns.Add(ws.Cells[1, countrows + 1].Value2, typeof(string));
-                countrows++;
+                dataTable.Columns.Add(ws.Cells[1, i + 1].Value2, typeof(string));
             }
 
-            int countlines = 2;
-            while (ws.Cells[countlines, 1].Value != null)
-                countlines++;
+            if (maxcountline == true && iLastRow > 100)
+                iLastRow = 102;
 
-            if (maxcountline == true && countlines > 100)
-                countlines = 102;
-
-            for (int i = 0; i < countlines-2; i++)
+            for (int i = 0; i < iLastRow - 2; i++)
             {
                 DataRow drow = dataTable.NewRow();
-                for (int j = 0; j < countrows; j++)
+                for (int j = 0; j < iLastCol; j++)
                 {
                     drow[j] = ws.Cells[i + 2, j + 1].Value;
                 }
