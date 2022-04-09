@@ -98,6 +98,10 @@
       <Project>{a4c2149e-7231-411d-a13a-200f906906b6}</Project>
       <Name>ClassOpenAndSave</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ClassLibraryForData\ClassLibraryForData.csproj">
+      <Project>{034c7a9d-9015-4392-a24c-c5f764648bbd}</Project>
+      <Name>ClassLibraryForData</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

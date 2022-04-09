@@ -56,8 +56,7 @@ namespace WindowsFormsApp
             GlobalFilePath = filepath;
             GlobalFileName = filenameextension;
 
-            this.Text = "Репозитой БД [" + GlobalFileName + "]";
-            CheckLineCount();
+            this.Text = "[" + GlobalFileName + "]";
 
             if (extension == ".txt")
             {
@@ -389,14 +388,6 @@ namespace WindowsFormsApp
                 textBoxOtherSeparator.Enabled = true;
             else
                 textBoxOtherSeparator.Enabled = false;
-        }
-
-        private void CheckLineCount()
-        {
-            if (radioButton100Line.Checked == true)
-            {
-                GlobalMaxCountLine = true;
-            }
         }
     }
 }

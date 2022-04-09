@@ -5,7 +5,6 @@ using System.Text;
 using System.Data;
 using System.IO;
 
-
 namespace ClassOpenAndSave
 {
     public class OpenCSV
