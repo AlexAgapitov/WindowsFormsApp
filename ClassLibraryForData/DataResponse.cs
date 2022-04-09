@@ -13,10 +13,12 @@ namespace ClassLibraryForData
         /// </summary>
         /// <param name="listformean">список для восстановления</param>
         /// <returns>среднее число</returns>
-        private static double MeanDouble(List<string> listformean)
+        private static List<string> MeanDouble(List<string> listformean)
         {
             double mean = 0.0;
             int countnotnull = 0;
+            List<string> listresult = new List<string>();
+            listresult.AddRange(listformean);
 
             for (int i = 0; i < listformean.Count; i++)
             {
@@ -27,7 +29,73 @@ namespace ClassLibraryForData
                 }
             }
             mean = mean / countnotnull;
-            return mean;
+
+            for (int i = 0; i < listresult.Count; i++)
+            {
+                if (listresult[i] == null)
+                {
+                    listresult[i] = mean.ToString();
+                }
+            }
+
+            return listresult;
+        }
+
+        private static List<string> LinearDouble(List<string> listformean)
+        {
+            List<string> listresult = new List<string>();
+            listresult.AddRange(listformean);
+            double difference = 0.0;
+
+            /*for (int i = 0; i < listformean.Count; i++)
+            {
+                if (i != 0)
+                {
+                    if (listformean[i] != null && listformean[i-1] != null)
+                    {
+                        difference = Convert.ToDouble(listformean[i]) - Convert.ToDouble(listformean[i-1]);
+                        break;
+                    }
+                }
+            }*/
+
+            int count = 0;
+            double temp = 0.0;
+            bool istemp = false;
+            while (count < listformean.Count)
+            {
+                if (istemp == false)
+                {
+                    if (listformean[count] != null)
+                    {
+                        temp = Convert.ToDouble(listformean[count]);
+                        istemp = true;
+                    }
+                }
+                else
+                {
+                    if (listformean[count] != null)
+                    {
+                        difference = Convert.ToDouble(listformean[count]) - temp;
+                        break;
+                    }
+                }
+                count++;
+            }
+
+
+            // добавить чтобы замещал null в любом месте
+            for (int i = 0; i < listresult.Count; i++)
+            {
+                if (listresult[i] == null)
+                {
+                    listresult[i] = (Convert.ToDouble(listformean[i + 1]) - difference).ToString();
+                }
+            }
+
+
+
+            return listresult;
         }
 
         /// <summary>
@@ -88,14 +156,8 @@ namespace ClassLibraryForData
 
             if (double.TryParse(checkDouble, out var check))
             {
-                double meandouble = MeanDouble(listforrecovery);
-                for (int i = 0; i < resultlist.Count; i++)
-                {
-                    if (resultlist[i] == null)
-                    {
-                        resultlist[i] = meandouble.ToString();
-                    }
-                }
+                //resultlist = MeanDouble(listforrecovery);
+                resultlist = LinearDouble(listforrecovery);
             }
             else
             {

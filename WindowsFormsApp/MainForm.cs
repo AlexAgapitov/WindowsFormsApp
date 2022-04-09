@@ -389,5 +389,113 @@ namespace WindowsFormsApp
             else
                 textBoxOtherSeparator.Enabled = false;
         }
+
+        /// <summary>
+        /// Восстановление данных
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ResponseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DataTable table = new DataTable();
+            table = (DataTable)dataGridView1.DataSource;
+            List<string> list = new List<string>();
+            List<string> listresult = new List<string>();
+            int s = 0;
+
+            MakeNewColumns makeNewColumns = new MakeNewColumns();
+            makeNewColumns.labelOr.Text = "Введите название колонки";
+            makeNewColumns.Text = "Восстановление данных";
+            makeNewColumns.ShowDialog();
+
+            string str = makeNewColumns.textBoxNameColumns.Text;
+
+            foreach (DataRow row in table.Rows)
+            {
+                foreach (DataColumn column in table.Columns)
+                {
+                    if (column.ColumnName == str)
+                    {
+                        if (row[column].ToString() == "" || row[column].ToString() == "-" || row[column].ToString() == " ")
+                        {
+                            list.Add(null);
+                        }
+                        else
+                        {
+                            list.Add(row[column].ToString());
+                        }
+                    }
+                }
+            }
+
+            listresult = ClassLibraryForData.DataResponse.Recovery(list);
+
+            foreach (DataRow row in table.Rows)
+            {
+                foreach (DataColumn column in table.Columns)
+                {
+                    if (column.ColumnName == str)
+                    {
+                        row[column] = listresult[s];
+                        s++;
+                    }
+                }
+            }
+            dataGridView1.DataSource = table;
+        }
+
+        /// <summary>
+        /// Нормализация данных
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void NormalizeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DataTable table = new DataTable();
+            table = (DataTable)dataGridView1.DataSource;
+            List<string> list = new List<string>();
+            List<string> listresult = new List<string>();
+            int s = 0;
+
+            MakeNewColumns makeNewColumns = new MakeNewColumns();
+            makeNewColumns.labelOr.Text = "Введите название колонки";
+            makeNewColumns.Text = "Нормализация данных";
+            makeNewColumns.ShowDialog();
+
+            string str = makeNewColumns.textBoxNameColumns.Text;
+
+            foreach (DataRow row in table.Rows)
+            {
+                foreach (DataColumn column in table.Columns)
+                {
+                    if (column.ColumnName == str)
+                    {
+                        if (row[column].ToString() == "" || row[column].ToString() == "-" || row[column].ToString() == " ")
+                        {
+                            list.Add(null);
+                        }
+                        else
+                        {
+                            list.Add(row[column].ToString());
+                        }
+                    }
+                }
+            }
+
+            listresult = ClassLibraryForData.DataNormalize.Normalize(list);
+
+            foreach (DataRow row in table.Rows)
+            {
+                foreach (DataColumn column in table.Columns)
+                {
+                    if (column.ColumnName == str)
+                    {
+                        row[column] = listresult[s];
+                        s++;
+                    }
+                }
+            }
+            dataGridView1.DataSource = table;
+        }
     }
 }

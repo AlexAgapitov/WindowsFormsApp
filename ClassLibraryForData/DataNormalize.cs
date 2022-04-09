@@ -40,16 +40,24 @@ namespace ClassLibraryForData
             List<string> listforresult = new List<string>();
             listforsearh.AddRange(listfornormalize);
             listforsearh.Sort();
-            double xmin = double.Parse(listforsearh[0]);
-            double xmax = double.Parse(listforsearh[listforsearh.Count - 1]);
+            double sum = 0.0;
+
+            for(int i = 0; i < listforsearh.Count; i++)
+            {
+                sum += int.Parse(listforsearh[i]) * int.Parse(listforsearh[i]);
+            }
+
+            sum = Math.Sqrt(sum);
 
             for (int i = 0; i < listfornormalize.Count; i++)
             {
-                double xnorm = (double.Parse(listfornormalize[i]) - xmin) / (xmax - xmin);
-                listforresult.Add(xnorm.ToString("F3"));
+                double xnorm = double.Parse(listfornormalize[i]) / sum;
+                listforresult.Add(xnorm.ToString("F8"));
             }
 
             return listforresult;
         }
+
+        
     }
 }
