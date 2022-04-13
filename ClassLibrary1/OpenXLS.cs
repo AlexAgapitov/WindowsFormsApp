@@ -11,6 +11,7 @@ namespace ClassOpenAndSave
 {
     public class OpenXLS
     {
+        int iLastRow, iLastCol;
         string filenameopen = string.Empty;
         bool maxcountline = false;
         int iLastRow, iLastCol;
@@ -46,10 +47,11 @@ namespace ClassOpenAndSave
                 dataTable.Columns.Add(ws.Cells[1, i + 1].Value2, typeof(string));
             }
 
-            if (maxcountline == true && iLastRow > 100)
-                iLastRow = 102;
+            int countlines = iLastRow;
+            /*while (ws.Cells[countlines, 1].Value != null)
+                countlines++;*/
 
-            for (int i = 0; i < iLastRow - 2; i++)
+            for (int i = 0; i < countlines - 2; i++)
             {
                 DataRow drow = dataTable.NewRow();
                 for (int j = 0; j < iLastCol; j++)

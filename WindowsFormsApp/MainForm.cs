@@ -80,15 +80,18 @@ namespace WindowsFormsApp
             {
                 MessageBox.Show("Файл не соответсвует типу CSV или XLS.");
             }
-            //нумерация строк
+            CountRows();
+            RadioBtnEnabled();
+            ToolsStripMenuItem.Enabled = true;
+        }
+
+        private void CountRows()
+        {
             int rows = dataGridView1.RowCount;
             for (int i = 0; i < rows; i++)
             {
-                dataGridView1.Rows[i].HeaderCell.Value = (dataGridView1.Rows[i].Index + 1).ToString();// i+1 потому, что нумерация нужна 
+                dataGridView1.Rows[i].HeaderCell.Value = (i + 1).ToString();   // i+1 потому, что нумерация нужна 
             }
-
-            RadioBtnEnabled();
-            ToolsStripMenuItem.Enabled = true;
         }
 
         /// <summary>
@@ -149,6 +152,7 @@ namespace WindowsFormsApp
             {
                 table = (DataTable)dataGridView1.DataSource;
                 table.Rows.Add();
+                CountRows();
             }
         }
 
@@ -193,6 +197,7 @@ namespace WindowsFormsApp
             {
                 int delet = dataGridView1.SelectedCells[0].RowIndex;
                 dataGridView1.Rows.RemoveAt(delet);
+                CountRows();
             }
             catch (Exception ex)
             {

@@ -8,6 +8,11 @@ namespace ClassLibraryForData
 {
     public class DataNormalize
     {
+        /// <summary>
+        /// Главный метод
+        /// </summary>
+        /// <param name="listfornormalize">лист для нормализации данных</param>
+        /// <returns>лист с нормализированными данными</returns>
         public static List<string> Normalize(List<string> listfornormalize)
         {
             List<string> listresult = new List<string>();
@@ -34,6 +39,11 @@ namespace ClassLibraryForData
             return listresult;
         }
 
+        /// <summary>
+        /// Метод, который нормализирует данные к значениям от 0 до 1
+        /// </summary>
+        /// <param name="listfornormalize">лист для нормализации данных</param>
+        /// <returns>лист с нормализированными данными</returns>
         private static List<string> NormalizeDouble(List<string> listfornormalize)
         {
             List<string> listforsearh = new List<string>();

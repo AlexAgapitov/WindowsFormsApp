@@ -41,28 +41,21 @@ namespace ClassLibraryForData
             return listresult;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="listformean"></param>
+        /// <returns></returns>
         private static List<string> LinearDouble(List<string> listformean)
         {
             List<string> listresult = new List<string>();
             listresult.AddRange(listformean);
             double difference = 0.0;
 
-            /*for (int i = 0; i < listformean.Count; i++)
-            {
-                if (i != 0)
-                {
-                    if (listformean[i] != null && listformean[i-1] != null)
-                    {
-                        difference = Convert.ToDouble(listformean[i]) - Convert.ToDouble(listformean[i-1]);
-                        break;
-                    }
-                }
-            }*/
-
             int count = 0;
             double temp = 0.0;
             bool istemp = false;
-            while (count < listformean.Count)
+            /*while (count < listformean.Count)
             {
                 if (istemp == false)
                 {
@@ -81,19 +74,86 @@ namespace ClassLibraryForData
                     }
                 }
                 count++;
+            }*/
+
+            for (int i = 0; i < listformean.Count; i++)
+            {
+                if (istemp == false)
+                {
+                    if (listformean[i] != null)
+                    {
+                        temp = Convert.ToDouble(listformean[i]);
+                        istemp = true;
+                    }
+                }
+                else
+                {
+                    if (listformean[i] != null)
+                    {
+                        difference = Convert.ToDouble(listformean[i]) - temp;
+                        break;
+                    }
+                    else
+                    {
+                        istemp = false;
+                    }
+                }
+                count++;
             }
 
+            temp = 0.0;
+            istemp = false;
+            int countnull = 1;
 
-            // добавить чтобы замещал null в любом месте
-            for (int i = 0; i < listresult.Count; i++)
+            if (listresult[0] == null)
             {
-                if (listresult[i] == null)
+                while (countnull < listformean.Count)
                 {
-                    listresult[i] = (Convert.ToDouble(listformean[i + 1]) - difference).ToString();
+                    countnull++;
+                    if (listformean[countnull] != null)
+                    {
+                        temp = Convert.ToDouble(listformean[countnull]);
+                        break;
+                    }
+                }
+                while (countnull - 1 >= 0)
+                {
+                    listresult[countnull - 1] = (temp - difference).ToString();
+                    temp = Convert.ToDouble(listresult[countnull - 1]);
+                    countnull--;
                 }
             }
 
-
+            for (int i = 0; i < listresult.Count; i++)
+            {
+                
+                if (istemp == false)
+                {
+                    if (listresult[i] != null)
+                    {
+                        temp = Convert.ToDouble(listformean[i]);
+                        istemp = true;
+                    }
+                    else
+                    {
+                        istemp = false;
+                    }
+                } 
+                else
+                {
+                    if (listresult[i] == null)
+                    {
+                        listresult[i] = (temp + difference).ToString();
+                        temp = Convert.ToDouble(listresult[i]);
+                        istemp = true;
+                    }
+                    else if (listresult[i] != null)
+                    {
+                        temp = Convert.ToDouble(listformean[i]);
+                        istemp = true;
+                    }
+                }
+            }
 
             return listresult;
         }
