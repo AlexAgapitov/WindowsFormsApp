@@ -14,7 +14,6 @@ namespace ClassOpenAndSave
         int iLastRow, iLastCol;
         string filenameopen = string.Empty;
         bool maxcountline = false;
-        int iLastRow, iLastCol;
         Excel.Application excel = new Excel.Application();
         Excel.Workbook wb;
         Excel.Worksheet ws;
