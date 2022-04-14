@@ -421,7 +421,7 @@ namespace WindowsFormsApp
                 {
                     if (column.ColumnName == str)
                     {
-                        if (row[column].ToString() == "" || row[column].ToString() == "-" || row[column].ToString() == " ")
+                        if (row[column].ToString() == "" || row[column].ToString() == "-" || row[column].ToString() == " " || row[column].ToString() == "<null>")
                         {
                             list.Add(null);
                         }
@@ -475,7 +475,7 @@ namespace WindowsFormsApp
                 {
                     if (column.ColumnName == str)
                     {
-                        if (row[column].ToString() == "" || row[column].ToString() == "-" || row[column].ToString() == " ")
+                        if (row[column].ToString() == "" || row[column].ToString() == "-" || row[column].ToString() == " " || row[column].ToString() == "<null>")
                         {
                             list.Add(null);
                         }

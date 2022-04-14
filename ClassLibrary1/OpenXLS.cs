@@ -55,7 +55,12 @@ namespace ClassOpenAndSave
                 DataRow drow = dataTable.NewRow();
                 for (int j = 0; j < iLastCol; j++)
                 {
-                    drow[j] = ws.Cells[i + 2, j + 1].Value;
+                    var temp = (ws.Cells[i + 2, j + 1].Value).ToString();
+                    if (temp == "" || temp == " " || temp == "-")
+                    {
+                        temp = "<null>";
+                    }
+                    drow[j] = temp;
                 }
                 dataTable.Rows.Add(drow);
             }

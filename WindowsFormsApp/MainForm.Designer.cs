@@ -45,7 +45,7 @@
             this.DeleteColumnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.данныеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.NormalizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.восстановлениеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ResponseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.radioButtonOther = new System.Windows.Forms.RadioButton();
@@ -65,9 +65,9 @@
             // 
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 129);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 133);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(560, 270);
+            this.dataGridView1.Size = new System.Drawing.Size(560, 266);
             this.dataGridView1.TabIndex = 0;
             // 
             // contextMenuStrip1
@@ -178,7 +178,7 @@
             // 
             this.данныеToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.NormalizeToolStripMenuItem,
-            this.восстановлениеToolStripMenuItem});
+            this.ResponseToolStripMenuItem});
             this.данныеToolStripMenuItem.Name = "данныеToolStripMenuItem";
             this.данныеToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
             this.данныеToolStripMenuItem.Text = "Данные";
@@ -190,12 +190,12 @@
             this.NormalizeToolStripMenuItem.Text = "Нормализация";
             this.NormalizeToolStripMenuItem.Click += new System.EventHandler(this.NormalizeToolStripMenuItem_Click_1);
             // 
-            // восстановлениеToolStripMenuItem
+            // ResponseToolStripMenuItem
             // 
-            this.восстановлениеToolStripMenuItem.Name = "восстановлениеToolStripMenuItem";
-            this.восстановлениеToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.восстановлениеToolStripMenuItem.Text = "Восстановление";
-            this.восстановлениеToolStripMenuItem.Click += new System.EventHandler(this.восстановлениеToolStripMenuItem_Click);
+            this.ResponseToolStripMenuItem.Name = "ResponseToolStripMenuItem";
+            this.ResponseToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ResponseToolStripMenuItem.Text = "Восстановление";
+            this.ResponseToolStripMenuItem.Click += new System.EventHandler(this.восстановлениеToolStripMenuItem_Click);
             // 
             // openFileDialog1
             // 
@@ -338,7 +338,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ToolStripMenuItem данныеToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem NormalizeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem восстановлениеToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ResponseToolStripMenuItem;
     }
 }
 
