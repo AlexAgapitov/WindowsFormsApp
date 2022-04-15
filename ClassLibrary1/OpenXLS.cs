@@ -56,7 +56,7 @@ namespace ClassOpenAndSave
                 for (int j = 0; j < iLastCol; j++)
                 {
                     var temp = (ws.Cells[i + 2, j + 1].Value).ToString();
-                    if (temp == "" || temp == " " || temp == "-")
+                    if (temp == "" || temp == " " || temp == "-" || temp == "?")
                     {
                         temp = "<null>";
                     }

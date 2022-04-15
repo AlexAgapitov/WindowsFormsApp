@@ -46,6 +46,7 @@
             this.данныеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.NormalizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ResponseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ResponseUnitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.radioButtonOther = new System.Windows.Forms.RadioButton();
@@ -56,6 +57,7 @@
             this.checkBoxSeparator = new System.Windows.Forms.CheckBox();
             this.textBoxOtherSeparator = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.CategoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -178,7 +180,9 @@
             // 
             this.данныеToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.NormalizeToolStripMenuItem,
-            this.ResponseToolStripMenuItem});
+            this.ResponseToolStripMenuItem,
+            this.ResponseUnitToolStripMenuItem,
+            this.CategoryToolStripMenuItem});
             this.данныеToolStripMenuItem.Name = "данныеToolStripMenuItem";
             this.данныеToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
             this.данныеToolStripMenuItem.Text = "Данные";
@@ -186,16 +190,23 @@
             // NormalizeToolStripMenuItem
             // 
             this.NormalizeToolStripMenuItem.Name = "NormalizeToolStripMenuItem";
-            this.NormalizeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.NormalizeToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
             this.NormalizeToolStripMenuItem.Text = "Нормализация";
             this.NormalizeToolStripMenuItem.Click += new System.EventHandler(this.NormalizeToolStripMenuItem_Click_1);
             // 
             // ResponseToolStripMenuItem
             // 
             this.ResponseToolStripMenuItem.Name = "ResponseToolStripMenuItem";
-            this.ResponseToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ResponseToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
             this.ResponseToolStripMenuItem.Text = "Восстановление";
             this.ResponseToolStripMenuItem.Click += new System.EventHandler(this.восстановлениеToolStripMenuItem_Click);
+            // 
+            // ResponseUnitToolStripMenuItem
+            // 
+            this.ResponseUnitToolStripMenuItem.Name = "ResponseUnitToolStripMenuItem";
+            this.ResponseUnitToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
+            this.ResponseUnitToolStripMenuItem.Text = "Приведение к одной ед.изм.";
+            this.ResponseUnitToolStripMenuItem.Click += new System.EventHandler(this.ResponseUnitToolStripMenuItem_Click);
             // 
             // openFileDialog1
             // 
@@ -287,6 +298,13 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Разделитель";
             // 
+            // CategoryToolStripMenuItem
+            // 
+            this.CategoryToolStripMenuItem.Name = "CategoryToolStripMenuItem";
+            this.CategoryToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
+            this.CategoryToolStripMenuItem.Text = "Приведение к категориям";
+            this.CategoryToolStripMenuItem.Click += new System.EventHandler(this.CategoryToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -339,6 +357,8 @@
         private System.Windows.Forms.ToolStripMenuItem данныеToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem NormalizeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ResponseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ResponseUnitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem CategoryToolStripMenuItem;
     }
 }
 

@@ -42,10 +42,10 @@ namespace ClassLibraryForData
         }
 
         /// <summary>
-        /// 
+        /// Линейная интерполяция
         /// </summary>
-        /// <param name="listformean"></param>
-        /// <returns></returns>
+        /// <param name="listformean">лист с пустыми данными</param>
+        /// <returns>лист с заполнеными данными</returns>
         private static List<string> LinearDouble(List<string> listformean)
         {
             List<string> listresult = new List<string>();
@@ -55,26 +55,6 @@ namespace ClassLibraryForData
             int count = 0;
             double temp = 0.0;
             bool istemp = false;
-            /*while (count < listformean.Count)
-            {
-                if (istemp == false)
-                {
-                    if (listformean[count] != null)
-                    {
-                        temp = Convert.ToDouble(listformean[count]);
-                        istemp = true;
-                    }
-                }
-                else
-                {
-                    if (listformean[count] != null)
-                    {
-                        difference = Convert.ToDouble(listformean[count]) - temp;
-                        break;
-                    }
-                }
-                count++;
-            }*/
 
             for (int i = 0; i < listformean.Count; i++)
             {

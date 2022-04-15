@@ -421,7 +421,7 @@ namespace WindowsFormsApp
                 {
                     if (column.ColumnName == str)
                     {
-                        if (row[column].ToString() == "" || row[column].ToString() == "-" || row[column].ToString() == " " || row[column].ToString() == "<null>")
+                        if (row[column].ToString() == "" || row[column].ToString() == "-" || row[column].ToString() == "?" || row[column].ToString() == " " || row[column].ToString() == "<null>")
                         {
                             list.Add(null);
                         }
@@ -475,7 +475,7 @@ namespace WindowsFormsApp
                 {
                     if (column.ColumnName == str)
                     {
-                        if (row[column].ToString() == "" || row[column].ToString() == "-" || row[column].ToString() == " " || row[column].ToString() == "<null>")
+                        if (row[column].ToString() == "" || row[column].ToString() == "-" || row[column].ToString() == "?" || row[column].ToString() == " " || row[column].ToString() == "<null>")
                         {
                             list.Add(null);
                         }
@@ -502,6 +502,138 @@ namespace WindowsFormsApp
             }
             dataGridView1.DataSource = table;
 
+        }
+
+        /// <summary>
+        /// Приведение к одной единице измерения
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ResponseUnitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DataTable table = new DataTable();
+            table = (DataTable)dataGridView1.DataSource;
+            List<string> list = new List<string>();
+            List<string> listresult = new List<string>();
+            bool isNull = false;
+            int s = 0;
+
+            MakeNewColumns makeNewColumns = new MakeNewColumns();
+            makeNewColumns.labelOr.Text = "Введите название колонки";
+            makeNewColumns.Text = "Приведение к одной ед.измр.";
+            makeNewColumns.ShowDialog();
+
+            string str = makeNewColumns.textBoxNameColumns.Text;
+
+            foreach (DataRow row in table.Rows)
+            {
+                foreach (DataColumn column in table.Columns)
+                {
+                    if (column.ColumnName == str)
+                    {
+                        if (row[column].ToString() == "" || row[column].ToString() == "-" || row[column].ToString() == "?" || row[column].ToString() == " " || row[column].ToString() == "<null>")
+                        {
+                            MessageBox.Show("Таблица содержит пустые данные.");
+                            isNull = true;
+                            break;
+                        }
+                        else
+                        {
+                            list.Add(row[column].ToString());
+                        }
+                    }
+                }
+                if (isNull) break;
+            }
+
+            if (!isNull)
+            {
+                listresult = ClassLibraryForData.DataResponseUnit.ConvertUnit(list);
+
+                foreach (DataRow row in table.Rows)
+                {
+                    foreach (DataColumn column in table.Columns)
+                    {
+                        if (column.ColumnName == str)
+                        {
+                            row[column] = listresult[s];
+                            s++;
+                        }
+                    }
+                }
+                dataGridView1.DataSource = table;
+            }
+        }
+
+        /// <summary>
+        /// Приведение к категориям
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CategoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DataTable table = new DataTable();
+            table = (DataTable)dataGridView1.DataSource;
+            List<string> list = new List<string>();
+            List<string> listresult = new List<string>();
+            bool isNull = false;
+            int s = 0;
+
+            GetStringForCategory getStringForCategory = new GetStringForCategory();
+            getStringForCategory.ShowDialog();
+
+            string nameColumn = getStringForCategory.textBoxNameColumn.Text;
+            string[] stringCategory = getStringForCategory.textBoxListCategory.Text.Split(',');
+            string[] stringBin = getStringForCategory.textBoxListRange.Text.Split(',');
+            List<string> listCategory = new List<string>();
+            List<string> listBin = new List<string>();
+            for (int i = 0; i < stringCategory.Length; i++)
+            {
+                listCategory.Add(stringCategory[i]);
+            }
+            for (int i = 0; i < stringBin.Length; i++)
+            {
+                listBin.Add(stringBin[i]);
+            }
+
+            foreach (DataRow row in table.Rows)
+            {
+                foreach (DataColumn column in table.Columns)
+                {
+                    if (column.ColumnName == nameColumn)
+                    {
+                        if (row[column].ToString() == "" || row[column].ToString() == "-" || row[column].ToString() == "?" || row[column].ToString() == " " || row[column].ToString() == "<null>")
+                        {
+                            MessageBox.Show("Таблица содержит пустые данные.");
+                            isNull = true;
+                            break;
+                        }
+                        else
+                        {
+                            list.Add(row[column].ToString());
+                        }
+                    }
+                }
+                if (isNull) break;
+            }
+
+            if (!isNull)
+            {
+                listresult = ClassLibraryForData.DataCategorical.CategoryCut(list, listCategory, listBin);
+
+                foreach (DataRow row in table.Rows)
+                {
+                    foreach (DataColumn column in table.Columns)
+                    {
+                        if (column.ColumnName == nameColumn)
+                        {
+                            row[column] = listresult[s];
+                            s++;
+                        }
+                    }
+                }
+                dataGridView1.DataSource = table;
+            }
         }
     }
 }

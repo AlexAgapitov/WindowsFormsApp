@@ -99,7 +99,7 @@ namespace ClassOpenAndSave
                 DataRow drow = SaveTable.NewRow();
                 for (int j = 0; j < Colums.Count; j++)
                 {
-                    if (Cells[i][j] == "" || Cells[i][j] == " " || Cells[i][j] == "-")
+                    if (Cells[i][j] == "" || Cells[i][j] == " " || Cells[i][j] == "-" || Cells[i][j] == "?")
                     {
                         Cells[i][j] = "<null>";
                     }
