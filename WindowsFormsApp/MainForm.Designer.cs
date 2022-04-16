@@ -46,7 +46,11 @@
             this.данныеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.NormalizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ResponseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.MeanResponseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.StringResponseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.LineResponseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ResponseUnitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CategoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.radioButtonOther = new System.Windows.Forms.RadioButton();
@@ -57,7 +61,6 @@
             this.checkBoxSeparator = new System.Windows.Forms.CheckBox();
             this.textBoxOtherSeparator = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.CategoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -196,10 +199,34 @@
             // 
             // ResponseToolStripMenuItem
             // 
+            this.ResponseToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MeanResponseToolStripMenuItem,
+            this.StringResponseToolStripMenuItem,
+            this.LineResponseToolStripMenuItem});
             this.ResponseToolStripMenuItem.Name = "ResponseToolStripMenuItem";
             this.ResponseToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
             this.ResponseToolStripMenuItem.Text = "Восстановление";
-            this.ResponseToolStripMenuItem.Click += new System.EventHandler(this.восстановлениеToolStripMenuItem_Click);
+            // 
+            // MeanResponseToolStripMenuItem
+            // 
+            this.MeanResponseToolStripMenuItem.Name = "MeanResponseToolStripMenuItem";
+            this.MeanResponseToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.MeanResponseToolStripMenuItem.Text = "По среднему значению";
+            this.MeanResponseToolStripMenuItem.Click += new System.EventHandler(this.MeanResponseToolStripMenuItem_Click);
+            // 
+            // StringResponseToolStripMenuItem
+            // 
+            this.StringResponseToolStripMenuItem.Name = "StringResponseToolStripMenuItem";
+            this.StringResponseToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.StringResponseToolStripMenuItem.Text = "По строкам";
+            this.StringResponseToolStripMenuItem.Click += new System.EventHandler(this.StringResponseToolStripMenuItem_Click);
+            // 
+            // LineResponseToolStripMenuItem
+            // 
+            this.LineResponseToolStripMenuItem.Name = "LineResponseToolStripMenuItem";
+            this.LineResponseToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.LineResponseToolStripMenuItem.Text = "Линейная интерполяция";
+            this.LineResponseToolStripMenuItem.Click += new System.EventHandler(this.LineResponseToolStripMenuItem_Click);
             // 
             // ResponseUnitToolStripMenuItem
             // 
@@ -207,6 +234,13 @@
             this.ResponseUnitToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
             this.ResponseUnitToolStripMenuItem.Text = "Приведение к одной ед.изм.";
             this.ResponseUnitToolStripMenuItem.Click += new System.EventHandler(this.ResponseUnitToolStripMenuItem_Click);
+            // 
+            // CategoryToolStripMenuItem
+            // 
+            this.CategoryToolStripMenuItem.Name = "CategoryToolStripMenuItem";
+            this.CategoryToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
+            this.CategoryToolStripMenuItem.Text = "Приведение к категориям";
+            this.CategoryToolStripMenuItem.Click += new System.EventHandler(this.CategoryToolStripMenuItem_Click);
             // 
             // openFileDialog1
             // 
@@ -298,13 +332,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Разделитель";
             // 
-            // CategoryToolStripMenuItem
-            // 
-            this.CategoryToolStripMenuItem.Name = "CategoryToolStripMenuItem";
-            this.CategoryToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
-            this.CategoryToolStripMenuItem.Text = "Приведение к категориям";
-            this.CategoryToolStripMenuItem.Click += new System.EventHandler(this.CategoryToolStripMenuItem_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -359,6 +386,9 @@
         private System.Windows.Forms.ToolStripMenuItem ResponseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ResponseUnitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem CategoryToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem MeanResponseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem StringResponseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem LineResponseToolStripMenuItem;
     }
 }
 

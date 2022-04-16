@@ -180,7 +180,7 @@ namespace ClassLibraryForData
         /// </summary>
         /// <param name="listforrecovery">лист с восстановленными данными</param>
         /// <returns></returns>
-        public static List<string> Recovery(List<string> listforrecovery)
+        public static List<string> Recovery(List<string> listforrecovery, string nameMethod)
         {
             List<string> resultlist = new List<string>();
             resultlist.AddRange(listforrecovery);
@@ -193,13 +193,22 @@ namespace ClassLibraryForData
                     checkDouble = res;
                 }
             }
-
-            if (double.TryParse(checkDouble, out var check))
+            if (nameMethod == "Mean")
             {
-                //resultlist = MeanDouble(listforrecovery);
-                resultlist = LinearDouble(listforrecovery);
+                if (double.TryParse(checkDouble, out var check))
+                {
+                    resultlist = MeanDouble(listforrecovery);
+                    //resultlist = LinearDouble(listforrecovery);
+                }
             }
-            else
+            else if (nameMethod == "Linear")
+            {
+                if (double.TryParse(checkDouble, out var check))
+                {
+                    resultlist = LinearDouble(listforrecovery);
+                }
+            }
+            else if (nameMethod == "String")
             {
                 string meanstring = MeanString(listforrecovery);
                 for (int i = 0; i < resultlist.Count; i++)
@@ -210,7 +219,6 @@ namespace ClassLibraryForData
                     }
                 }
             }
-
             return resultlist;
         }
     }   

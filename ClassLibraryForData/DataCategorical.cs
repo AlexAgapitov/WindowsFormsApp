@@ -8,6 +8,13 @@ namespace ClassLibraryForData
 {
     public class DataCategorical
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="listforcategory"></param>
+        /// <param name="labels"></param>
+        /// <param name="bins"></param>
+        /// <returns></returns>
         public static List<string> CategoryCut(List<string> listforcategory, List<string> labels, List<string> bins)
         {
             List<string> listresult = new List<string>();

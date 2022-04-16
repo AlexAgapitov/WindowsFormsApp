@@ -396,7 +396,7 @@ namespace WindowsFormsApp
         }
 
         /// <summary>
-        /// Восстановление данных
+        /// Нормализация данных
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -450,59 +450,59 @@ namespace WindowsFormsApp
         }
 
         /// <summary>
-        /// Нормализация данных
+        /// Восстановление данных
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void восстановлениеToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            DataTable table = new DataTable();
-            table = (DataTable)dataGridView1.DataSource;
-            List<string> list = new List<string>();
-            List<string> listresult = new List<string>();
-            int s = 0;
+        //private void восстановлениеToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    DataTable table = new DataTable();
+        //    table = (DataTable)dataGridView1.DataSource;
+        //    List<string> list = new List<string>();
+        //    List<string> listresult = new List<string>();
+        //    int s = 0;
 
-            MakeNewColumns makeNewColumns = new MakeNewColumns();
-            makeNewColumns.labelOr.Text = "Введите название колонки";
-            makeNewColumns.Text = "Восстановление данных";
-            makeNewColumns.ShowDialog();
+        //    MakeNewColumns makeNewColumns = new MakeNewColumns();
+        //    makeNewColumns.labelOr.Text = "Введите название колонки";
+        //    makeNewColumns.Text = "Восстановление данных";
+        //    makeNewColumns.ShowDialog();
 
-            string str = makeNewColumns.textBoxNameColumns.Text;
+        //    string str = makeNewColumns.textBoxNameColumns.Text;
 
-            foreach (DataRow row in table.Rows)
-            {
-                foreach (DataColumn column in table.Columns)
-                {
-                    if (column.ColumnName == str)
-                    {
-                        if (row[column].ToString() == "" || row[column].ToString() == "-" || row[column].ToString() == "?" || row[column].ToString() == " " || row[column].ToString() == "<null>")
-                        {
-                            list.Add(null);
-                        }
-                        else
-                        {
-                            list.Add(row[column].ToString());
-                        }
-                    }
-                }
-            }
+        //    foreach (DataRow row in table.Rows)
+        //    {
+        //        foreach (DataColumn column in table.Columns)
+        //        {
+        //            if (column.ColumnName == str)
+        //            {
+        //                if (row[column].ToString() == "" || row[column].ToString() == "-" || row[column].ToString() == "?" || row[column].ToString() == " " || row[column].ToString() == "<null>")
+        //                {
+        //                    list.Add(null);
+        //                }
+        //                else
+        //                {
+        //                    list.Add(row[column].ToString());
+        //                }
+        //            }
+        //        }
+        //    }
 
-            listresult = ClassLibraryForData.DataResponse.Recovery(list);
+        //    listresult = ClassLibraryForData.DataResponse.Recovery(list, "Mean");
 
-            foreach (DataRow row in table.Rows)
-            {
-                foreach (DataColumn column in table.Columns)
-                {
-                    if (column.ColumnName == str)
-                    {
-                        row[column] = listresult[s];
-                        s++;
-                    }
-                }
-            }
-            dataGridView1.DataSource = table;
+        //    foreach (DataRow row in table.Rows)
+        //    {
+        //        foreach (DataColumn column in table.Columns)
+        //        {
+        //            if (column.ColumnName == str)
+        //            {
+        //                row[column] = listresult[s];
+        //                s++;
+        //            }
+        //        }
+        //    }
+        //    dataGridView1.DataSource = table;
 
-        }
+        //}
 
         /// <summary>
         /// Приведение к одной единице измерения
@@ -583,8 +583,8 @@ namespace WindowsFormsApp
             getStringForCategory.ShowDialog();
 
             string nameColumn = getStringForCategory.textBoxNameColumn.Text;
-            string[] stringCategory = getStringForCategory.textBoxListCategory.Text.Split(',');
-            string[] stringBin = getStringForCategory.textBoxListRange.Text.Split(',');
+            string[] stringCategory = getStringForCategory.textBoxListCategory.Text.Split(';');
+            string[] stringBin = getStringForCategory.textBoxListRange.Text.Split(';');
             List<string> listCategory = new List<string>();
             List<string> listBin = new List<string>();
             for (int i = 0; i < stringCategory.Length; i++)
@@ -634,6 +634,92 @@ namespace WindowsFormsApp
                 }
                 dataGridView1.DataSource = table;
             }
+        }
+
+        /// <summary>
+        /// Среднее значение
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MeanResponseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string nameMethod = "Mean";
+            GerResponse(nameMethod);
+        }
+
+        /// <summary>
+        /// Самое повторяющееся слово
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void StringResponseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string nameMethod = "String";
+            GerResponse(nameMethod);
+        }
+
+        /// <summary>
+        /// Линейная интерполяция
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void LineResponseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string nameMethod = "Linear";
+            GerResponse(nameMethod);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="nameMethod"></param>
+        private void GerResponse(string nameMethod)
+        {
+            DataTable table = new DataTable();
+            table = (DataTable)dataGridView1.DataSource;
+            List<string> list = new List<string>();
+            List<string> listresult = new List<string>();
+            int s = 0;
+
+            MakeNewColumns makeNewColumns = new MakeNewColumns();
+            makeNewColumns.labelOr.Text = "Введите название колонки";
+            makeNewColumns.Text = "Восстановление данных";
+            makeNewColumns.ShowDialog();
+
+            string str = makeNewColumns.textBoxNameColumns.Text;
+
+            foreach (DataRow row in table.Rows)
+            {
+                foreach (DataColumn column in table.Columns)
+                {
+                    if (column.ColumnName == str)
+                    {
+                        if (row[column].ToString() == "" || row[column].ToString() == "-" || row[column].ToString() == "?" || row[column].ToString() == " " || row[column].ToString() == "<null>")
+                        {
+                            list.Add(null);
+                        }
+                        else
+                        {
+                            list.Add(row[column].ToString());
+                        }
+                    }
+                }
+            }
+
+            listresult = ClassLibraryForData.DataResponse.Recovery(list, nameMethod);
+
+            foreach (DataRow row in table.Rows)
+            {
+                foreach (DataColumn column in table.Columns)
+                {
+                    if (column.ColumnName == str)
+                    {
+                        row[column] = listresult[s];
+                        s++;
+                    }
+                }
+            }
+            dataGridView1.DataSource = table;
         }
     }
 }
