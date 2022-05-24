@@ -49,7 +49,6 @@
             this.MeanResponseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.StringResponseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.LineResponseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ResponseUnitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CategoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
@@ -61,16 +60,39 @@
             this.checkBoxSeparator = new System.Windows.Forms.CheckBox();
             this.textBoxOtherSeparator = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.checkBoxkmeans = new System.Windows.Forms.CheckBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.numericUpDownafterdot = new System.Windows.Forms.NumericUpDown();
+            this.label2 = new System.Windows.Forms.Label();
+            this.buttonKmeans = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.numericUpDownk = new System.Windows.Forms.NumericUpDown();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.textBoxkvalue = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.buttonKNN = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.numericUpDownKNN = new System.Windows.Forms.NumericUpDown();
+            this.checkBoxKnn = new System.Windows.Forms.CheckBox();
+            this.категорияТип1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.категорияТип2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.нормализацияТип1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.нормализацияТип2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownafterdot)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownk)).BeginInit();
+            this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownKNN)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
             // 
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 133);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 215);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(560, 266);
             this.dataGridView1.TabIndex = 0;
@@ -89,7 +111,7 @@
             this.данныеToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(584, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(588, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -184,7 +206,6 @@
             this.данныеToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.NormalizeToolStripMenuItem,
             this.ResponseToolStripMenuItem,
-            this.ResponseUnitToolStripMenuItem,
             this.CategoryToolStripMenuItem});
             this.данныеToolStripMenuItem.Name = "данныеToolStripMenuItem";
             this.данныеToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
@@ -192,8 +213,11 @@
             // 
             // NormalizeToolStripMenuItem
             // 
+            this.NormalizeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.нормализацияТип1ToolStripMenuItem,
+            this.нормализацияТип2ToolStripMenuItem});
             this.NormalizeToolStripMenuItem.Name = "NormalizeToolStripMenuItem";
-            this.NormalizeToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
+            this.NormalizeToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
             this.NormalizeToolStripMenuItem.Text = "Нормализация";
             this.NormalizeToolStripMenuItem.Click += new System.EventHandler(this.NormalizeToolStripMenuItem_Click_1);
             // 
@@ -204,7 +228,7 @@
             this.StringResponseToolStripMenuItem,
             this.LineResponseToolStripMenuItem});
             this.ResponseToolStripMenuItem.Name = "ResponseToolStripMenuItem";
-            this.ResponseToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
+            this.ResponseToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
             this.ResponseToolStripMenuItem.Text = "Восстановление";
             // 
             // MeanResponseToolStripMenuItem
@@ -228,17 +252,13 @@
             this.LineResponseToolStripMenuItem.Text = "Линейная интерполяция";
             this.LineResponseToolStripMenuItem.Click += new System.EventHandler(this.LineResponseToolStripMenuItem_Click);
             // 
-            // ResponseUnitToolStripMenuItem
-            // 
-            this.ResponseUnitToolStripMenuItem.Name = "ResponseUnitToolStripMenuItem";
-            this.ResponseUnitToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
-            this.ResponseUnitToolStripMenuItem.Text = "Приведение к одной ед.изм.";
-            this.ResponseUnitToolStripMenuItem.Click += new System.EventHandler(this.ResponseUnitToolStripMenuItem_Click);
-            // 
             // CategoryToolStripMenuItem
             // 
+            this.CategoryToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.категорияТип1ToolStripMenuItem,
+            this.категорияТип2ToolStripMenuItem});
             this.CategoryToolStripMenuItem.Name = "CategoryToolStripMenuItem";
-            this.CategoryToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
+            this.CategoryToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
             this.CategoryToolStripMenuItem.Text = "Приведение к категориям";
             this.CategoryToolStripMenuItem.Click += new System.EventHandler(this.CategoryToolStripMenuItem_Click);
             // 
@@ -332,11 +352,190 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Разделитель";
             // 
+            // checkBoxkmeans
+            // 
+            this.checkBoxkmeans.AutoSize = true;
+            this.checkBoxkmeans.Location = new System.Drawing.Point(6, 18);
+            this.checkBoxkmeans.Name = "checkBoxkmeans";
+            this.checkBoxkmeans.Size = new System.Drawing.Size(67, 17);
+            this.checkBoxkmeans.TabIndex = 13;
+            this.checkBoxkmeans.Text = "K-means";
+            this.checkBoxkmeans.UseVisualStyleBackColor = true;
+            this.checkBoxkmeans.CheckedChanged += new System.EventHandler(this.checkBoxkmeans_CheckedChanged);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.numericUpDownafterdot);
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Controls.Add(this.buttonKmeans);
+            this.groupBox2.Controls.Add(this.label1);
+            this.groupBox2.Controls.Add(this.numericUpDownk);
+            this.groupBox2.Controls.Add(this.checkBoxkmeans);
+            this.groupBox2.Location = new System.Drawing.Point(399, 27);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(177, 121);
+            this.groupBox2.TabIndex = 14;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Поиск центроидов";
+            this.groupBox2.Visible = false;
+            // 
+            // numericUpDownafterdot
+            // 
+            this.numericUpDownafterdot.Location = new System.Drawing.Point(98, 62);
+            this.numericUpDownafterdot.Name = "numericUpDownafterdot";
+            this.numericUpDownafterdot.Size = new System.Drawing.Size(43, 20);
+            this.numericUpDownafterdot.TabIndex = 18;
+            this.numericUpDownafterdot.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 64);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(86, 13);
+            this.label2.TabIndex = 17;
+            this.label2.Text = "После запятой:";
+            // 
+            // buttonKmeans
+            // 
+            this.buttonKmeans.Location = new System.Drawing.Point(9, 89);
+            this.buttonKmeans.Name = "buttonKmeans";
+            this.buttonKmeans.Size = new System.Drawing.Size(67, 23);
+            this.buttonKmeans.TabIndex = 16;
+            this.buttonKmeans.Text = "Поиск";
+            this.buttonKmeans.UseVisualStyleBackColor = true;
+            this.buttonKmeans.Click += new System.EventHandler(this.buttonKmeans_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 43);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(16, 13);
+            this.label1.TabIndex = 15;
+            this.label1.Text = "k:";
+            // 
+            // numericUpDownk
+            // 
+            this.numericUpDownk.Location = new System.Drawing.Point(28, 41);
+            this.numericUpDownk.Name = "numericUpDownk";
+            this.numericUpDownk.Size = new System.Drawing.Size(43, 20);
+            this.numericUpDownk.TabIndex = 14;
+            this.numericUpDownk.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.textBoxkvalue);
+            this.groupBox3.Controls.Add(this.label3);
+            this.groupBox3.Controls.Add(this.buttonKNN);
+            this.groupBox3.Controls.Add(this.label4);
+            this.groupBox3.Controls.Add(this.numericUpDownKNN);
+            this.groupBox3.Controls.Add(this.checkBoxKnn);
+            this.groupBox3.Location = new System.Drawing.Point(12, 133);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(340, 76);
+            this.groupBox3.TabIndex = 16;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Метод ближайшего соседа";
+            // 
+            // textBoxkvalue
+            // 
+            this.textBoxkvalue.Location = new System.Drawing.Point(191, 44);
+            this.textBoxkvalue.Name = "textBoxkvalue";
+            this.textBoxkvalue.Size = new System.Drawing.Size(37, 20);
+            this.textBoxkvalue.TabIndex = 19;
+            this.textBoxkvalue.Text = "3";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(169, 47);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(16, 13);
+            this.label3.TabIndex = 18;
+            this.label3.Text = "k:";
+            // 
+            // buttonKNN
+            // 
+            this.buttonKNN.Location = new System.Drawing.Point(246, 42);
+            this.buttonKNN.Name = "buttonKNN";
+            this.buttonKNN.Size = new System.Drawing.Size(75, 23);
+            this.buttonKNN.TabIndex = 17;
+            this.buttonKNN.Text = "Поиск";
+            this.buttonKNN.UseVisualStyleBackColor = true;
+            this.buttonKNN.Click += new System.EventHandler(this.buttonKNN_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 47);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(108, 13);
+            this.label4.TabIndex = 15;
+            this.label4.Text = "Кол-во параметров:";
+            // 
+            // numericUpDownKNN
+            // 
+            this.numericUpDownKNN.Location = new System.Drawing.Point(120, 45);
+            this.numericUpDownKNN.Name = "numericUpDownKNN";
+            this.numericUpDownKNN.Size = new System.Drawing.Size(43, 20);
+            this.numericUpDownKNN.TabIndex = 14;
+            this.numericUpDownKNN.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            // 
+            // checkBoxKnn
+            // 
+            this.checkBoxKnn.AutoSize = true;
+            this.checkBoxKnn.Location = new System.Drawing.Point(9, 20);
+            this.checkBoxKnn.Name = "checkBoxKnn";
+            this.checkBoxKnn.Size = new System.Drawing.Size(49, 17);
+            this.checkBoxKnn.TabIndex = 13;
+            this.checkBoxKnn.Text = "KNN";
+            this.checkBoxKnn.UseVisualStyleBackColor = true;
+            this.checkBoxKnn.CheckedChanged += new System.EventHandler(this.checkBoxKnn_CheckedChanged);
+            // 
+            // категорияТип1ToolStripMenuItem
+            // 
+            this.категорияТип1ToolStripMenuItem.Name = "категорияТип1ToolStripMenuItem";
+            this.категорияТип1ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.категорияТип1ToolStripMenuItem.Text = "Категория тип №1";
+            // 
+            // категорияТип2ToolStripMenuItem
+            // 
+            this.категорияТип2ToolStripMenuItem.Name = "категорияТип2ToolStripMenuItem";
+            this.категорияТип2ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.категорияТип2ToolStripMenuItem.Text = "Категория тип №2";
+            // 
+            // нормализацияТип1ToolStripMenuItem
+            // 
+            this.нормализацияТип1ToolStripMenuItem.Name = "нормализацияТип1ToolStripMenuItem";
+            this.нормализацияТип1ToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            this.нормализацияТип1ToolStripMenuItem.Text = "Нормализация тип №1";
+            // 
+            // нормализацияТип2ToolStripMenuItem
+            // 
+            this.нормализацияТип2ToolStripMenuItem.Name = "нормализацияТип2ToolStripMenuItem";
+            this.нормализацияТип2ToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            this.нормализацияТип2ToolStripMenuItem.Text = "Нормализация тип №2";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(584, 411);
+            this.ClientSize = new System.Drawing.Size(588, 494);
+            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.dataGridView1);
@@ -350,6 +549,13 @@
             this.menuStrip1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownafterdot)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownk)).EndInit();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownKNN)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -384,11 +590,28 @@
         private System.Windows.Forms.ToolStripMenuItem данныеToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem NormalizeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ResponseToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem ResponseUnitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem CategoryToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem MeanResponseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem StringResponseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem LineResponseToolStripMenuItem;
+        private System.Windows.Forms.CheckBox checkBoxkmeans;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.NumericUpDown numericUpDownk;
+        private System.Windows.Forms.Button buttonKmeans;
+        private System.Windows.Forms.NumericUpDown numericUpDownafterdot;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Button buttonKNN;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.NumericUpDown numericUpDownKNN;
+        private System.Windows.Forms.CheckBox checkBoxKnn;
+        private System.Windows.Forms.TextBox textBoxkvalue;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ToolStripMenuItem нормализацияТип1ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem нормализацияТип2ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem категорияТип1ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem категорияТип2ToolStripMenuItem;
     }
 }
 

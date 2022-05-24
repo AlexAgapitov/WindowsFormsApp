@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data;
+﻿using System.Data;
 using Excel = Microsoft.Office.Interop.Excel;
 
 namespace ClassOpenAndSave
@@ -17,6 +12,13 @@ namespace ClassOpenAndSave
         Excel.Workbook wb;
         Excel.Worksheet ws;
 
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="filenamepath">путь к фалу</param>
+        /// <param name="filenamesave">название файла</param>
+        /// <param name="dataTable">база данных для сохранения</param>
+        /// <param name="saveAs">"параметр сохранить как"</param>
         public SaveXLS(string filenamepath, string filenamesave, DataTable dataTable, bool saveAs)
         {
             this.filenamesave = filenamesave;

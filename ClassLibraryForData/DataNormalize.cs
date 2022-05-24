@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ClassLibraryForData
 {
@@ -11,9 +8,10 @@ namespace ClassLibraryForData
         /// <summary>
         /// Главный метод
         /// </summary>
-        /// <param name="listfornormalize">лист для нормализации данных</param>
-        /// <returns>лист с нормализированными данными</returns>
-        public static List<string> Normalize(List<string> listfornormalize)
+        /// <param name="listfornormalize">список для преобразования</param>
+        /// <param name="namemethod">название метода</param>
+        /// <returns>преобразованный список</returns>
+        public static List<string> Normalize(List<string> listfornormalize, string namemethod)
         {
             List<string> listresult = new List<string>();
 
@@ -25,11 +23,22 @@ namespace ClassLibraryForData
                 {
                     checkDouble = res;
                 }
+                else
+                {
+                    return null;
+                }
             }
 
             if (double.TryParse(checkDouble, out var check))
             {
-                listresult = NormalizeDouble(listfornormalize);
+                if (namemethod == "sqrt")
+                {
+                    listresult = NormalizeDouble(listfornormalize);
+                }
+                else
+                {
+                    listresult = NormalizeMinMax(listfornormalize);
+                }
             }
             else
             {
@@ -40,7 +49,7 @@ namespace ClassLibraryForData
         }
 
         /// <summary>
-        /// Метод, который нормализирует данные к значениям от 0 до 1
+        /// Метод, который нормализирует данные к значениям от 0 до 1 (формула X = x/(Корень суммы квадратов))
         /// </summary>
         /// <param name="listfornormalize">лист для нормализации данных</param>
         /// <returns>лист с нормализированными данными</returns>
@@ -54,7 +63,7 @@ namespace ClassLibraryForData
 
             for(int i = 0; i < listforsearh.Count; i++)
             {
-                sum += int.Parse(listforsearh[i]) * int.Parse(listforsearh[i]);
+                sum += double.Parse(listforsearh[i]) * double.Parse(listforsearh[i]);
             }
 
             sum = Math.Sqrt(sum);
@@ -68,6 +77,28 @@ namespace ClassLibraryForData
             return listforresult;
         }
 
+        /// <summary>
+        /// Метод, который нормализирует данные к значениям от 0 до 1 (формула X = (x-xmin)/(xmax-xmin))
+        /// </summary>
+        /// <param name="listfornormalize"></param>
+        /// <returns></returns>
+        private static List<string> NormalizeMinMax(List<string> listfornormalize)
+        {
+            var listforresult = new List<string>();
+            var listsort = new List<string>();
+            listsort.AddRange(listfornormalize);
+            listsort.Sort();
+            double min = double.Parse(listsort[0]);
+            double max = double.Parse(listsort[listsort.Count - 1]);
+            double X_std = 0.0;
+            for (int i = 0; i < listfornormalize.Count; i++)
+            {
+                X_std = (double.Parse(listfornormalize[i]) - min) / (max - min);
+                listforresult.Add(X_std.ToString());
+            }
+
+            return listforresult;
+        }
         
     }
 }

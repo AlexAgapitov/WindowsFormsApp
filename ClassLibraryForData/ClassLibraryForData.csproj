@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataCategorical.cs" />
+    <Compile Include="DataKNN.cs" />
     <Compile Include="DataNormalize.cs" />
     <Compile Include="DataResponse.cs" />
     <Compile Include="DataResponseUnit.cs" />

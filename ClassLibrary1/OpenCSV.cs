@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Data;
 using System.IO;
 
@@ -45,7 +43,7 @@ namespace ClassOpenAndSave
         /// </summary>
         /// <param name="filenameopen">Путь к файлу</param>
         /// <returns>Список со строками</returns>
-        public static List<string> MakeList(string filenameopen, bool maxcountline)
+        public static List<string> MakeList(string filenameopen)
         {
             List<string> _allDB = new List<string>();
 
@@ -59,10 +57,6 @@ namespace ClassOpenAndSave
                     {
                         return null;
                     }
-                    if (maxcountline == true && i > 100)
-                    {
-                        break;
-                    }
                     line = line.Remove(line.Length - 1);
                     _allDB.Add(line);
                     i++;
@@ -72,15 +66,15 @@ namespace ClassOpenAndSave
         }
 
         /// <summary>
-        /// Функция, создания datatable для вывода 
+        /// Функция заполнения datatable для вывода 
         /// </summary>
         /// <param name="filenameopen">Путь к файлу</param>
         /// <param name="separator">Символ разделителя</param>
-        /// <returns>datatable с значениями из БД</returns>
-        public static DataTable MakeDataTable(string filenameopen, char separator, bool maxcountline)
+        /// <returns>datatable с значениями из файла</returns>
+        public static DataTable MakeDataTable(string filenameopen, char separator)
         {
             GlobalChar = separator;
-            List<string> ListCsv = MakeList(filenameopen, maxcountline);
+            List<string> ListCsv = MakeList(filenameopen);
             DataTable SaveTable = new DataTable();
 
             if (ListCsv == null)

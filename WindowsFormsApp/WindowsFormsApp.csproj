@@ -50,6 +50,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GetColumns.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GetColumns.Designer.cs">
+      <DependentUpon>GetColumns.cs</DependentUpon>
+    </Compile>
     <Compile Include="GetStringForCategory.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -70,6 +76,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="GetColumns.resx">
+      <DependentUpon>GetColumns.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GetStringForCategory.resx">
       <DependentUpon>GetStringForCategory.cs</DependentUpon>
     </EmbeddedResource>

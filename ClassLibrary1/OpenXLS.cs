@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data;
-using System.Data.OleDb;
+﻿using System.Data;
 using Excel = Microsoft.Office.Interop.Excel;
 
 namespace ClassOpenAndSave
@@ -13,20 +7,17 @@ namespace ClassOpenAndSave
     {
         int iLastRow, iLastCol;
         string filenameopen = string.Empty;
-        bool maxcountline = false;
         Excel.Application excel = new Excel.Application();
         Excel.Workbook wb;
         Excel.Worksheet ws;
 
         /// <summary>
-        /// 
+        /// Конструктор
         /// </summary>
         /// <param name="filenameopen">путь к файлу</param>
-        /// <param name="maxcountline">булевая перменная, все строки или 100</param>
-        public OpenXLS(string filenameopen, bool maxcountline)
+        public OpenXLS(string filenameopen)
         {
             this.filenameopen = filenameopen;
-            this.maxcountline = maxcountline;
             wb = excel.Workbooks.Open(filenameopen);
             ws = wb.Worksheets[1];
             iLastRow = ws.Cells[ws.Rows.Count, "A"].End[Excel.XlDirection.xlUp].Row;
@@ -47,8 +38,6 @@ namespace ClassOpenAndSave
             }
 
             int countlines = iLastRow;
-            /*while (ws.Cells[countlines, 1].Value != null)
-                countlines++;*/
 
             for (int i = 0; i < countlines - 2; i++)
             {

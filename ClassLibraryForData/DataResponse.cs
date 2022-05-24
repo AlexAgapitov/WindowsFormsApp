@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ClassLibraryForData
 {
@@ -178,8 +176,8 @@ namespace ClassLibraryForData
         /// <summary>
         /// Главный метод 
         /// </summary>
-        /// <param name="listforrecovery">лист с восстановленными данными</param>
-        /// <returns></returns>
+        /// <param name="listforrecovery">Список с сырыми данными</param>
+        /// <returns>Список с восстановленными данными</returns>
         public static List<string> Recovery(List<string> listforrecovery, string nameMethod)
         {
             List<string> resultlist = new List<string>();
@@ -198,7 +196,6 @@ namespace ClassLibraryForData
                 if (double.TryParse(checkDouble, out var check))
                 {
                     resultlist = MeanDouble(listforrecovery);
-                    //resultlist = LinearDouble(listforrecovery);
                 }
             }
             else if (nameMethod == "Linear")
