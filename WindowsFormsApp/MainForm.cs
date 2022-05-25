@@ -62,7 +62,7 @@ namespace WindowsFormsApp
             GlobalFilePath = filepath;
             GlobalFileName = filenameextension;
 
-            this.Text = "[" + GlobalFileName + "]";
+            this.Text = "Репозиторий БД - [" + GlobalFileName + "]";
 
             if (extension == ".txt")
             {
@@ -452,7 +452,7 @@ namespace WindowsFormsApp
                 }
             }
 
-            listresult = ClassLibraryForData.DataNormalize.Normalize(list, "sqrt");
+            listresult = ClassLibraryForData.DataNormalize.Normalize(list, "sqt");
 
             foreach (DataRow row in table.Rows)
             {
