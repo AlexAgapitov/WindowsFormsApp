@@ -56,7 +56,7 @@ namespace ClassLibraryForData
 
             for (int i = 0; i < listformean.Count; i++)
             {
-                if (istemp == false)
+                if (!istemp)
                 {
                     if (listformean[i] != null)
                     {
@@ -105,7 +105,7 @@ namespace ClassLibraryForData
             for (int i = 0; i < listresult.Count; i++)
             {
                 
-                if (istemp == false)
+                if (!istemp)
                 {
                     if (listresult[i] != null)
                     {

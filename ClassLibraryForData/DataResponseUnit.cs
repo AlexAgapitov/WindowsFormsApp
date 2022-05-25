@@ -13,48 +13,42 @@ namespace ClassLibraryForData
             {
                 var temp = s;
                 double value;
-                if (temp.Contains("см"))
+                if (temp.Contains("см"))// todo: contains НЕ игнорирует регистр
                 {
-                    value = Convert.ToDouble(temp.Replace("см", "")) / 100;
-                    temp = value.ToString() + "м";
-                    listresult.Add(temp);
+                    value = Convert.ToDouble(temp.Replace("см", "")) / 100;// todo: а если там ещё пробелы ?
+                    temp = value + "м";
                 }
                 else if (temp.Contains("км"))
                 {
                     value = Convert.ToDouble(temp.Replace("км", "")) * 100;
-                    temp = value.ToString() + "м";
-                    listresult.Add(temp);
+                    temp = value + "м";
                 }
                 else if (temp.Contains("мм"))
                 {
                     value = Convert.ToDouble(temp.Replace("мм", "")) / 1000;
-                    temp = value.ToString() + "м";
-                    listresult.Add(temp);
+                    temp = value + "м";
                 }
                 else if (temp.Contains("м"))
                 {
                     /*value = Convert.ToDouble(temp.Replace("мм", "")) / 1000;
                     temp = value.ToString() + "м";*/
-                    listresult.Add(temp);
                 }
                 else if (temp.Contains("г"))
                 {
                     value = Convert.ToDouble(temp.Replace("г", "")) * 1000;
-                    temp = value.ToString() + "кг";
-                    listresult.Add(temp);
+                    temp = value + "кг";
                 }
                 else if (temp.Contains("т"))
                 {
                     value = Convert.ToDouble(temp.Replace("т", "")) / 1000;
-                    temp = value.ToString() + "кг";
-                    listresult.Add(temp);
+                    temp = value + "кг";
                 }
                 else if (temp.Contains("кг"))
                 {
                     /*value = Convert.ToDouble(temp.Replace("мм", "")) / 1000;
                     temp = value.ToString() + "м";*/
-                    listresult.Add(temp);
                 }
+                listresult.Add(temp);
             }
 
             return listresult;
