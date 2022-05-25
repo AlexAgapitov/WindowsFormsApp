@@ -77,7 +77,7 @@ namespace ClassOpenAndSave
             List<string> ListCsv = MakeList(filenameopen);
             DataTable SaveTable = new DataTable();
 
-            if (ListCsv == null)
+            if (ListCsv == null || ListCsv.Count == 0)
             {
                 return null;
             }
