@@ -25,7 +25,7 @@ namespace ClassOpenAndSave
             this.filenamepath = filenamepath;
             this.dataTable = dataTable;
             excel = new Excel.Application();
-            if (saveAs == true)
+            if (saveAs)
             {
                 excel.SheetsInNewWorkbook = 3;
                 wb = excel.Workbooks.Add(1);

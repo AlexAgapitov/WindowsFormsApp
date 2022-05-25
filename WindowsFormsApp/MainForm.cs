@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Windows.Forms;
-using Excel = Microsoft.Office.Interop.Excel;
 
 namespace WindowsFormsApp
 {
@@ -128,8 +127,8 @@ namespace WindowsFormsApp
 
                 if (saveFileDialog1.ShowDialog() == DialogResult.Cancel)
                     return;
-                string filepathsave = System.IO.Path.GetDirectoryName(saveFileDialog1.FileName);
-                string filenamesave = System.IO.Path.GetFileName(saveFileDialog1.FileName);
+                string filepathsave = Path.GetDirectoryName(saveFileDialog1.FileName);
+                string filenamesave = Path.GetFileName(saveFileDialog1.FileName);
 
                 char separator = ReturnChar();
                 table = (DataTable)dataGridView1.DataSource;
@@ -184,13 +183,13 @@ namespace WindowsFormsApp
                 if (dataGridView1.ColumnCount == 0)
                 {
                     DataTable dt = new DataTable();
-                    dt.Columns.Add(str.ToString(), typeof(string));
+                    dt.Columns.Add(str, typeof(string));
                     dataGridView1.DataSource = dt;
                 }
                 else
                 {
                     table = (DataTable)dataGridView1.DataSource;
-                    table.Columns.Add(str.ToString(), typeof(string));
+                    table.Columns.Add(str, typeof(string));
                 }
             }
         }
@@ -285,8 +284,8 @@ namespace WindowsFormsApp
 
                 if (saveFileDialog1.ShowDialog() == DialogResult.Cancel)
                     return;
-                string filepathsave = System.IO.Path.GetDirectoryName(saveFileDialog1.FileName);
-                string filenamesave = System.IO.Path.GetFileName(saveFileDialog1.FileName);
+                string filepathsave = Path.GetDirectoryName(saveFileDialog1.FileName);
+                string filenamesave = Path.GetFileName(saveFileDialog1.FileName);
 
                 GlobalSaveAs = true;
                 GlobalSavePath = filepathsave + "\\";
@@ -360,17 +359,17 @@ namespace WindowsFormsApp
         {
             char SeparatorChar = ',';
 
-            if (checkBoxSeparator.Checked == true)
+            if (checkBoxSeparator.Checked)
             {
-                if (radioButtonComma.Checked == true)
+                if (radioButtonComma.Checked)
                     SeparatorChar = ',';
-                if (radioButtonCemicolon.Checked == true)
+                if (radioButtonCemicolon.Checked)
                     SeparatorChar = ';';
-                if (radioButtonSpace.Checked == true)
+                if (radioButtonSpace.Checked)
                     SeparatorChar = ' ';
-                if (radioButtonTabuletion.Checked == true)
+                if (radioButtonTabuletion.Checked)
                     SeparatorChar = '\t';
-                if (radioButtonOther.Checked == true)
+                if (radioButtonOther.Checked)
                     SeparatorChar = textBoxOtherSeparator.Text[0];
             }
             return SeparatorChar;
@@ -383,7 +382,7 @@ namespace WindowsFormsApp
         /// <param name="e"></param>
         private void checkBoxSeparator_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBoxSeparator.Checked == true)
+            if (checkBoxSeparator.Checked)
             {
                 radioButtonTabuletion.Enabled = true;
                 radioButtonSpace.Enabled = true;
@@ -408,10 +407,7 @@ namespace WindowsFormsApp
         /// <param name="e"></param>
         private void radioButtonOther_CheckedChanged(object sender, EventArgs e)
         {
-            if(radioButtonOther.Checked)
-                textBoxOtherSeparator.Enabled = true;
-            else
-                textBoxOtherSeparator.Enabled = false;
+            textBoxOtherSeparator.Enabled = radioButtonOther.Checked;
         }
 
         /// <summary>
@@ -673,7 +669,7 @@ namespace WindowsFormsApp
         /// <param name="e"></param>
         private void StringResponseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string nameMethod = "String";
+            string nameMethod = "String";// todo: enum
             GerResponse(nameMethod);
         }
 
@@ -684,7 +680,7 @@ namespace WindowsFormsApp
         /// <param name="e"></param>
         private void LineResponseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string nameMethod = "Linear";
+            string nameMethod = "Linear";// todo: enum
             GerResponse(nameMethod);
         }
 
@@ -798,7 +794,7 @@ namespace WindowsFormsApp
 
             if (k == 2)
             {
-                while (repeat == true)
+                while (repeat)
                 {
                     for (int i = 0; i < rowLenght; i++)
                     {
@@ -820,24 +816,24 @@ namespace WindowsFormsApp
                     }
                     for (int i = 0; i < newCenterX1.Count; i++)
                     {
-                        newCenterPointX1 = newCenterPointX1 + newCenterX1[i];
+                        newCenterPointX1 += newCenterX1[i];
                     }
                     for (int i = 0; i < newCenterY1.Count; i++)
                     {
-                        newCenterPointY1 = newCenterPointY1 + newCenterY1[i];
+                        newCenterPointY1 += newCenterY1[i];
                     }
                     for (int i = 0; i < newCenterX2.Count; i++)
                     {
-                        newCenterPointX2 = newCenterPointX2 + newCenterX2[i];
+                        newCenterPointX2 += newCenterX2[i];
                     }
                     for (int i = 0; i < newCenterY2.Count; i++)
                     {
-                        newCenterPointY2 = newCenterPointY2 + newCenterY2[i];
+                        newCenterPointY2 += newCenterY2[i];
                     }
-                    newCenterPointX1 = newCenterPointX1 / newCenterX1.Count;
-                    newCenterPointY1 = newCenterPointY1 / newCenterY1.Count;
-                    newCenterPointX2 = newCenterPointX2 / newCenterX2.Count;
-                    newCenterPointY2 = newCenterPointY2 / newCenterY2.Count;
+                    newCenterPointX1 /= newCenterX1.Count;
+                    newCenterPointY1 /= newCenterY1.Count;
+                    newCenterPointX2 /= newCenterX2.Count;
+                    newCenterPointY2 /= newCenterY2.Count;
 
                     centerX1 = Math.Round(centerX1, digitNumberAfterDot);
                     centerY1 = Math.Round(centerY1, digitNumberAfterDot);
@@ -881,7 +877,7 @@ namespace WindowsFormsApp
                     else
                     {
                         repeat = true;
-                        counter = counter + 1;
+                        counter++;
                     }
                     centerX1 = newCenterPointX1;
                     centerY1 = newCenterPointY1;
@@ -891,7 +887,7 @@ namespace WindowsFormsApp
             }
             else if (k == 3)
             {
-                while (repeat == true)
+                while (repeat)
                 {
                     for (int i = 0; i < rowLenght; i++)
                     {
@@ -923,34 +919,34 @@ namespace WindowsFormsApp
                     }
                     for (int i = 0; i < newCenterX1.Count; i++)
                     {
-                        newCenterPointX1 = newCenterPointX1 + newCenterX1[i];
+                        newCenterPointX1 += newCenterX1[i];
                     }
                     for (int i = 0; i < newCenterY1.Count; i++)
                     {
-                        newCenterPointY1 = newCenterPointY1 + newCenterY1[i];
+                        newCenterPointY1 += newCenterY1[i];
                     }
                     for (int i = 0; i < newCenterX2.Count; i++)
                     {
-                        newCenterPointX2 = newCenterPointX2 + newCenterX2[i];
+                        newCenterPointX2 += newCenterX2[i];
                     }
                     for (int i = 0; i < newCenterY2.Count; i++)
                     {
-                        newCenterPointY2 = newCenterPointY2 + newCenterY2[i];
+                        newCenterPointY2 += newCenterY2[i];
                     }
                     for (int i = 0; i < newCenterX3.Count; i++)
                     {
-                        newCenterPointX3 = newCenterPointX3 + newCenterX3[i];
+                        newCenterPointX3 += newCenterX3[i];
                     }
                     for (int i = 0; i < newCenterY3.Count; i++)
                     {
-                        newCenterPointY3 = newCenterPointY3 + newCenterY3[i];
+                        newCenterPointY3 += newCenterY3[i];
                     }
-                    newCenterPointX1 = newCenterPointX1 / newCenterX1.Count;
-                    newCenterPointY1 = newCenterPointY1 / newCenterY1.Count;
-                    newCenterPointX2 = newCenterPointX2 / newCenterX2.Count;
-                    newCenterPointY2 = newCenterPointY2 / newCenterY2.Count;
-                    newCenterPointX3 = newCenterPointX3 / newCenterX3.Count;
-                    newCenterPointY3 = newCenterPointY3 / newCenterY3.Count;
+                    newCenterPointX1 /= newCenterX1.Count;
+                    newCenterPointY1 /= newCenterY1.Count;
+                    newCenterPointX2 /= newCenterX2.Count;
+                    newCenterPointY2 /= newCenterY2.Count;
+                    newCenterPointX3 /= newCenterX3.Count;
+                    newCenterPointY3 /= newCenterY3.Count;
 
                     centerX1 = Math.Round(centerX1, digitNumberAfterDot);
                     centerY1 = Math.Round(centerY1, digitNumberAfterDot);
@@ -1022,7 +1018,7 @@ namespace WindowsFormsApp
         /// </summary>
         private void checkBoxkmeans_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBoxkmeans.Checked == true)
+            if (checkBoxkmeans.Checked)
             {
                 numericUpDownk.Enabled = true;
                 numericUpDownafterdot.Enabled = true;
@@ -1120,7 +1116,7 @@ namespace WindowsFormsApp
         /// </summary>
         private void checkBoxKnn_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBoxKnn.Checked == true)
+            if (checkBoxKnn.Checked)
             {
                 numericUpDownKNN.Enabled = true;
                 textBoxkvalue.Enabled = true;

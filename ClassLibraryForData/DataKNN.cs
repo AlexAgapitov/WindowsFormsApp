@@ -82,9 +82,9 @@ namespace ClassLibraryForData
                     double tempclass = 0.0;
                     foreach (int val in kmeans.Distinct())
                     {
-                        if (kmeans.Where(x => x == val).Count() > tempclass)
+                        if (kmeans.Count(x => x == val) > tempclass)
                         {
-                            tempclass = kmeans.Where(x => x == val).Count();
+                            tempclass = kmeans.Count(x => x == val);
                             tempval = val;
                         }
                     }
@@ -152,9 +152,9 @@ namespace ClassLibraryForData
                     double tempclass = 0.0;
                     foreach (int val in kmeans.Distinct())
                     {
-                        if (kmeans.Where(x => x == val).Count() > tempclass)
+                        if (kmeans.Count(x => x == val) > tempclass)
                         {
-                            tempclass = kmeans.Where(x => x == val).Count();
+                            tempclass = kmeans.Count(x => x == val);
                             tempval = val;
                         }
                     }

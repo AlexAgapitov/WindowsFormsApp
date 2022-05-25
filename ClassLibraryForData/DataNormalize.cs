@@ -11,7 +11,7 @@ namespace ClassLibraryForData
         /// <param name="listfornormalize">список для преобразования</param>
         /// <param name="namemethod">название метода</param>
         /// <returns>преобразованный список</returns>
-        public static List<string> Normalize(List<string> listfornormalize, string namemethod)
+        public static List<string> Normalize(List<string> listfornormalize, string namemethod)// todo: в чём смысл метода ?
         {
             List<string> listresult = new List<string>();
 
@@ -31,7 +31,7 @@ namespace ClassLibraryForData
 
             if (double.TryParse(checkDouble, out var check))
             {
-                if (namemethod == "sqrt")
+                if (namemethod == "sqrt")// todo: enum
                 {
                     listresult = NormalizeDouble(listfornormalize);
                 }
