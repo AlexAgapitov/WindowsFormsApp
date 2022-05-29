@@ -11,15 +11,14 @@ namespace ClassLibraryForData
         /// <param name="listfornormalize">список для преобразования</param>
         /// <param name="namemethod">название метода</param>
         /// <returns>преобразованный список</returns>
-        public static List<string> Normalize(List<string> listfornormalize, string namemethod)// todo: в чём смысл метода ?
+        public static List<string> Normalize(List<string> listfornormalize, EnumsMethod.MethodNormalize methodNormalize)
         {
-            List<string> listresult = new List<string>();
-
+            var listresult = new List<string>();
             string checkDouble = string.Empty;
 
             foreach (string res in listfornormalize)
             {
-                if (res != null)
+                if (res != null && double.TryParse(checkDouble, out var check))
                 {
                     checkDouble = res;
                 }
@@ -28,23 +27,14 @@ namespace ClassLibraryForData
                     return null;
                 }
             }
-
-            if (double.TryParse(checkDouble, out var check))
+            if (methodNormalize == EnumsMethod.MethodNormalize.normalizeDouble)
             {
-                if (namemethod == "sqrt")// todo: enum
-                {
-                    listresult = NormalizeDouble(listfornormalize);
-                }
-                else
-                {
-                    listresult = NormalizeMinMax(listfornormalize);
-                }
+                listresult = NormalizeDouble(listfornormalize);
             }
             else
             {
-                return null;
+                listresult = NormalizeMinMax(listfornormalize);
             }
-
             return listresult;
         }
 
@@ -90,7 +80,7 @@ namespace ClassLibraryForData
             listsort.Sort();
             double min = double.Parse(listsort[0]);
             double max = double.Parse(listsort[listsort.Count - 1]);
-            double X_std = 0.0;
+            double X_std;
             for (int i = 0; i < listfornormalize.Count; i++)
             {
                 X_std = (double.Parse(listfornormalize[i]) - min) / (max - min);

@@ -26,7 +26,7 @@ namespace ClassLibraryForData
                     countnotnull++;
                 }
             }
-            mean = mean / countnotnull;
+            mean /= countnotnull;
 
             for (int i = 0; i < listresult.Count; i++)
             {
@@ -145,7 +145,7 @@ namespace ClassLibraryForData
         {
             List<string> listNoRepeat = new HashSet<string>(listformean).ToList();
             List<int> listCountRepeat = new List<int>();
-            string PopularString = string.Empty;
+            string PopularString;
 
             for (int i = 0; i < listNoRepeat.Count; i++)
             {
@@ -178,12 +178,12 @@ namespace ClassLibraryForData
         /// </summary>
         /// <param name="listforrecovery">Список с сырыми данными</param>
         /// <returns>Список с восстановленными данными</returns>
-        public static List<string> Recovery(List<string> listforrecovery, string nameMethod)
+        public static List<string> Recovery(List<string> listforrecovery, EnumsMethod.MethodResponse methodResponse)
         {
             List<string> resultlist = new List<string>();
             resultlist.AddRange(listforrecovery);
             string checkDouble = string.Empty;
-
+            
             foreach (string res in resultlist)
             {
                 if (res != null)
@@ -191,21 +191,21 @@ namespace ClassLibraryForData
                     checkDouble = res;
                 }
             }
-            if (nameMethod == "Mean")
+            if (methodResponse == EnumsMethod.MethodResponse.responseDouble)
             {
                 if (double.TryParse(checkDouble, out var check))
                 {
                     resultlist = MeanDouble(listforrecovery);
                 }
             }
-            else if (nameMethod == "Linear")
+            else if (methodResponse == EnumsMethod.MethodResponse.responseLinear)
             {
                 if (double.TryParse(checkDouble, out var check))
                 {
                     resultlist = LinearDouble(listforrecovery);
                 }
             }
-            else if (nameMethod == "String")
+            else if (methodResponse == EnumsMethod.MethodResponse.responseString)
             {
                 string meanstring = MeanString(listforrecovery);
                 for (int i = 0; i < resultlist.Count; i++)

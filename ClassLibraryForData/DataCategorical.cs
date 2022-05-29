@@ -21,11 +21,6 @@ namespace ClassLibraryForData
             {
                 for (int j = 0; j < bins.Count; j++)
                 {
-                    //if (Convert.ToDouble(listforcategory[i]) < Convert.ToDouble(bins[0]))
-                    //{
-                    //    listresult.Add("Вне диапазона");
-                    //    break;
-                    //}
                     if (Convert.ToDouble(listforcategory[i]) < Convert.ToDouble(bins[j]))
                     {
                         listresult[i] =  labels[j];
@@ -33,7 +28,6 @@ namespace ClassLibraryForData
                     }
                 }
             }
-
             return listresult;
         }
 
